@@ -10781,7 +10781,6 @@ var receivePosts = exports.receivePosts = function receivePosts(posts) {
 };
 
 function fetchPosts(subreddit) {
-  console.log(subreddit);
   return function (dispatch) {
     _superagent2.default.get('/api/reddit/subreddit/' + subreddit).end(function (err, res) {
       if (err) {
