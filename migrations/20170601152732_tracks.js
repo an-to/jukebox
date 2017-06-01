@@ -5,7 +5,7 @@ exports.up = function (knex, Promise) {
     table.string('name')
     table.integer('soudcloud_id')
     table.string('genre')
-    table.string('user_id')
+    table.integer('user_id')
     table.string('user_name')
     table.string('permalink_url')
     table.string('artwork_url')
