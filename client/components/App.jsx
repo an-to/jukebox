@@ -1,12 +1,14 @@
 import React from 'react'
 
-import LoadSubreddit from './LoadSubreddit'
-import SubredditContainer from '../containers/SubredditContainer'
+import Header from './Header'
+import SearchBar from './SearchBar'
+import Content from './Content'
 
 const App = () => (
-  <div className='app-container'>
-    <LoadSubreddit />
-    <SubredditContainer />
+  <div className='app'>
+    <Header />
+    <SearchBar />
+    <Content />
   </div>
 )
 
