@@ -1,7 +1,7 @@
 import test from 'ava'
 import request from 'supertest'
 
-import app from '../../server/server'
+import createServer from '../../server/server'
 import setupDb from './setup-db'
 
 setupDb(test, (knex) => app.set('knex', knex))
@@ -13,7 +13,7 @@ test('example', t => {
 // Tracks
 test('GET /track/:id', t => {
   return request(t.context.app)
-    .get('/api/v1/track/2')
+    .get('/api/v1/tracks/2')
     .expect(200)
     .then((res) => {
       return new Promise((resolve, reject) => {
