@@ -10763,7 +10763,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.receivePosts = undefined;
-exports.fetchPosts = fetchPosts;
+exports.addPlaylist = addPlaylist;
 
 var _superagent = __webpack_require__(235);
 
@@ -10780,7 +10780,7 @@ var receivePosts = exports.receivePosts = function receivePosts(posts) {
   };
 };
 
-function fetchPosts(subreddit) {
+function addPlaylist(subreddit) {
   return function (dispatch) {
     _superagent2.default.get('/api/reddit/subreddit/' + subreddit).end(function (err, res) {
       if (err) {
