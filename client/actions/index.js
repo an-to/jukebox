@@ -7,13 +7,12 @@ export const receivePosts = (posts) => {
   }
 }
 
-export function fetchPosts (subreddit) {
+export function fetchTracks (subreddit) {
   return (dispatch) => {
     request
-      .get(`/api/reddit/subreddit/${subreddit}`)
+      .get(`/api/${subreddit}`)
       .end((err, res) => {
         if (err) {
-          console.error(err.message)
           return
         }
         dispatch(receivePosts(res.body))
