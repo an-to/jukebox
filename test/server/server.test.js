@@ -80,3 +80,84 @@ test('Deleted /playlists/:id/delete', t => {
       })
     })
 })
+artist
+soundcloud_id
+
+// Tracks
+test('GET /track/:id', t => {
+  return request(t.context.app)
+    .get('/api/v1/track/2')
+    .expect(200)
+    .then((res) => {
+      return new Promise((resolve, reject) => {
+        t.is(res.body.id, 2)
+        t.is(res.body.name, 'I am a song')
+        t.is(res.body.user_id, 1234)
+        t.is(res.body.user_name, 'I am a user')
+        t.is(res.body.soundcloud_id, 126777857)
+        t.is(res.body.permalink_url, 'http://songsongsong.com')
+        t.is(res.body.artwork_url, 'https://i1.sndcdn.com/artworks-000066429805-wjchtx-large.jpg')
+        t.is(res.body.genre, 'death metal')
+        t.is(res.body.stream_url, 'https://api.soundcloud.com/tracks/126777857/stream')
+        t.is(res.body.streamable, false)
+        resolve()
+      })
+    })
+})
+
+test('Get /playlists', t => {
+  return request(t.context.app)
+    .get('/api/v1/playlsits')
+    .expect(200)
+    .then((res) => {
+      return new Promise((resolve, reject) => {
+        t.is(res.body.length, 3)
+        resolve()
+      })
+    })
+})
+
+test('Post /playlists/add', t => {
+  return request(t.context.app)
+    .post('/api/v1/playlists/add')
+    .send({name: 'my awesome playlist'})
+    .expect(201)
+    .then(() => {
+      return t.context.connection('playlists').select()
+    })
+    .then((playlists) => {
+      return new Promise((resolve, reject) => {
+        t.is(playlists.length, 4)
+      })
+    })
+})
+
+test('Put /playlists/:id/update', t => {
+  return request(t.context.app)
+    .put('/api/v1/playlists/2/update')
+    .send({id: 2, name: 'an updated playlist'})
+    .expect(204)
+    .then(() => {
+      return t.context.connection('playlists').where('id', 2).first()
+    })
+    .then((playlist) => {
+      return new Promise((resolve, reject) => {
+        t.is(playlist.name, 'an updated playlist')
+      })
+    })
+})
+
+test('Deleted /playlists/:id/delete', t => {
+  return request(t.context.app)
+    .delete('/api/v1/playlists/3/delete')
+    .expect(202)
+    .then((res) => {
+      return t.context.connection('playlists').select()
+    })
+    .then((playlists) => {
+      return new Promise((resolve, reject) => {
+        t.is(playlists.length, 2)
+        resolve()
+      })
+    })
+})
