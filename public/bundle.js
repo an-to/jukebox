@@ -10771,7 +10771,6 @@ exports.addPlaylist = addPlaylist;
 var request = __webpack_require__(235);
 
 var receiveTracks = function receiveTracks(tracks) {
-  console.log(tracks);
   return {
     type: 'RECEIVE_TRACKS',
     searchResults: tracks.map(function (track) {
@@ -11071,6 +11070,7 @@ var SearchBar = function (_React$Component) {
     key: 'handleChange',
     value: function handleChange(e) {
       this.setState({ query: e.target.value });
+      this.props.dispatch((0, _actions.fetchTracks)(this.state.query));
     }
   }, {
     key: 'handleClick',
