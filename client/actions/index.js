@@ -14,6 +14,20 @@ const searchError = (message) => {
   }
 }
 
+export function addPlaylist (subreddit) {
+  return (dispatch) => {
+    request
+      .get(`/api/reddit/subreddit/${subreddit}`)
+      .end((err, res) => {
+        if (err) {
+          console.error(err.message)
+          return
+        }
+        dispatch(receivePosts(res.body))
+      })
+  }
+}
+
  function fetchTracks (query) {
    return (dispatch) => {
      request

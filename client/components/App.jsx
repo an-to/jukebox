@@ -1,11 +1,13 @@
 import React from 'react'
-
-import SearchBar from './SearchBar'
+import Header from './Header'
 import SearchContainer from '../containers/SearchContainer'
+import Content from './Content'
 
 const App = () => (
-  <div className='app-container'>
+  <div className='app'>
+    <Header />
     <SearchContainer />
+    <Content />
   </div>
 )
 

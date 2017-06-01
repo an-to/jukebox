@@ -1,2 +1,8 @@
 node_modules
+<<<<<<< HEAD
 bundle*
+=======
+*.sqlite3
+bundle.js
+bundle.js.map
+>>>>>>> dev

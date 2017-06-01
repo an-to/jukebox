@@ -7,9 +7,14 @@
     "knex": "knex",
     "test": "standard | snazzy && node ava  -v 'test/**/*.test.js'",
     "clientapitest": "ava -v test/client/actions.test.js",
+    "test": "standard | snazzy & ava  -v 'test/**/*.test.js'",
     "start": "node server server/index",
     "eslint": "eslint src",
     "dev": "nodemon --watch server server/index & webpack --watch"
+  },
+  "ava": {
+    "require": "babel-register",
+    "babel": "inherit"
   },
   "keywords": [
     "react",
@@ -30,6 +35,7 @@
     "nock": "^9.0.13",
     "nodemon": "^1.11.0",
     "react": "^15.3.0",
+    "react-addons-test-utils": "^15.5.1",
     "react-dom": "^15.3.0",
     "react-redux": "^4.4.5",
     "redux": "^3.5.2",

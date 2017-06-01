@@ -15,18 +15,24 @@ class SearchBar extends React.Component {
     this.setState({query: e.target.value})
   }
 
+  handleClick() {
+    this.props.dispatch(fetchTracks(this.state.query))
+  }
+
  render () {
    return (
       <div>
-        <input type='text' name='query' value={this.state.query} onChange={this.handleChange.bind(this)}/>
-        <button
-          onClick={() => this.props.dispatch(fetchTracks(this.state.query))}
-          >Go</button>
-      </div>
+          <div className='container searchBarWrapper'>
+            <div className='row searchBarRow'>
+              <input className='searchInput' type='text' placeholder='Search for songs' value={this.state.query} onChange={this.handleChange.bind(this)} />
+              <button className='searchSubmit' onClick={this.handleClick.bind(this)}>Go</button>
+            </div>
+          </div>
+     </div>
+
     )
   }
 }
 
 SearchBar = connect()(SearchBar)
-
 export default SearchBar
