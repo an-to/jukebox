@@ -10669,17 +10669,17 @@ var _react = __webpack_require__(14);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Header = __webpack_require__(240);
+var _Header = __webpack_require__(101);
 
 var _Header2 = _interopRequireDefault(_Header);
 
-var _SearchBar = __webpack_require__(241);
-
-var _SearchBar2 = _interopRequireDefault(_SearchBar);
-
-var _ListPlaylists = __webpack_require__(242);
+var _ListPlaylists = __webpack_require__(240);
 
 var _ListPlaylists2 = _interopRequireDefault(_ListPlaylists);
+
+var _SearchContainer = __webpack_require__(103);
+
+var _SearchContainer2 = _interopRequireDefault(_SearchContainer);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -10688,7 +10688,7 @@ var App = function App() {
     'div',
     { className: 'app' },
     _react2.default.createElement(_Header2.default, null),
-    _react2.default.createElement(_SearchBar2.default, null),
+    _react2.default.createElement(_SearchContainer2.default, null),
     _react2.default.createElement(_ListPlaylists2.default, null)
   );
 };
@@ -10708,14 +10708,14 @@ Object.defineProperty(exports, "__esModule", {
 
 var _redux = __webpack_require__(34);
 
-var _subreddits = __webpack_require__(105);
+var _searchResults = __webpack_require__(105);
 
-var _subreddits2 = _interopRequireDefault(_subreddits);
+var _searchResults2 = _interopRequireDefault(_searchResults);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = (0, _redux.combineReducers)({
-  subreddits: _subreddits2.default
+  searchResults: _searchResults2.default
 });
 
 /***/ }),
@@ -10758,11 +10758,230 @@ thunk.withExtraArgument = createThunkMiddleware;
 exports['default'] = thunk;
 
 /***/ }),
-/* 99 */,
+/* 99 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var request = __webpack_require__(235);
+
+var receiveTracks = function receiveTracks(tracks) {
+  return {
+    type: 'RECEIVE_TRACKS',
+    searchResults: tracks.map(function (track) {
+      return track;
+    })
+  };
+};
+
+var searchError = function searchError(message) {
+  return {
+    type: 'SEARCH_ERROR',
+    message: message
+  };
+};
+
+function fetchTracks(query) {
+  return function (dispatch) {
+    request.get('http://api.soundcloud.com/tracks').query({
+      q: query,
+      client_id: 'MHsPaGAB9flti3yZ6a7bMdgq1GM9n7EL'
+    }).end(function (err, res) {
+      if (err) {
+        dispatch(searchError(err.message));
+      } else {
+        dispatch(receiveTracks(res.body));
+      }
+    });
+  };
+}
+
+module.exports = {
+  receiveTracks: receiveTracks,
+  searchError: searchError,
+  fetchTracks: fetchTracks
+};
+
+/***/ }),
 /* 100 */,
-/* 101 */,
-/* 102 */,
-/* 103 */,
+/* 101 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(14);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Header = function (_React$Component) {
+  _inherits(Header, _React$Component);
+
+  function Header() {
+    _classCallCheck(this, Header);
+
+    return _possibleConstructorReturn(this, (Header.__proto__ || Object.getPrototypeOf(Header)).apply(this, arguments));
+  }
+
+  _createClass(Header, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        { className: 'container-fluid headerWrapper' },
+        _react2.default.createElement(
+          'div',
+          { className: 'row headerRow' },
+          _react2.default.createElement(
+            'div',
+            { className: 'five columns' },
+            _react2.default.createElement('img', { src: 'https://d30y9cdsu7xlg0.cloudfront.net/png/12992-200.png' })
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'seven columns' },
+            _react2.default.createElement(
+              'div',
+              { className: 'trackPlayingName' },
+              'i\'m the title of a song wee wee wee'
+            )
+          )
+        )
+      );
+    }
+  }]);
+
+  return Header;
+}(_react2.default.Component);
+
+exports.default = Header;
+
+/***/ }),
+/* 102 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(14);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRedux = __webpack_require__(33);
+
+var _actions = __webpack_require__(99);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var SearchBar = function (_React$Component) {
+  _inherits(SearchBar, _React$Component);
+
+  function SearchBar(props) {
+    _classCallCheck(this, SearchBar);
+
+    var _this = _possibleConstructorReturn(this, (SearchBar.__proto__ || Object.getPrototypeOf(SearchBar)).call(this, props));
+
+    _this.state = {
+      query: ''
+    };
+    return _this;
+  }
+
+  _createClass(SearchBar, [{
+    key: 'handleChange',
+    value: function handleChange(e) {
+      this.setState({ query: e.target.value });
+    }
+  }, {
+    key: 'handleClick',
+    value: function handleClick() {
+      this.props.dispatch((0, _actions.fetchTracks)(this.state.query));
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          'div',
+          { className: 'container searchBarWrapper' },
+          _react2.default.createElement(
+            'div',
+            { className: 'row searchBarRow' },
+            _react2.default.createElement('input', { className: 'searchInput', type: 'text', placeholder: 'Search for songs', value: this.state.query, onChange: this.handleChange.bind(this) }),
+            _react2.default.createElement(
+              'button',
+              { className: 'searchSubmit', onClick: this.handleClick.bind(this) },
+              'Go'
+            )
+          )
+        )
+      );
+    }
+  }]);
+
+  return SearchBar;
+}(_react2.default.Component);
+
+SearchBar = (0, _reactRedux.connect)()(SearchBar);
+exports.default = SearchBar;
+
+/***/ }),
+/* 103 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _reactRedux = __webpack_require__(33);
+
+var _SearchBar = __webpack_require__(102);
+
+var _SearchBar2 = _interopRequireDefault(_SearchBar);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function mapState2Props(state) {
+  return {
+    searchResults: state.searchResults
+  };
+}
+
+exports.default = (0, _reactRedux.connect)(mapState2Props)(_SearchBar2.default);
+
+/***/ }),
 /* 104 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10818,20 +11037,21 @@ Object.defineProperty(exports, "__esModule", {
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
-function subreddits() {
+function searchResults() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
   var action = arguments[1];
 
   switch (action.type) {
-    case 'RECEIVE_POSTS':
-      return [].concat(_toConsumableArray(action.posts));
+    case 'RECEIVE_TRACKS':
+      console.log(action);
+      return [].concat(_toConsumableArray(action.searchResults));
 
     default:
       return state;
   }
 }
 
-exports.default = subreddits;
+exports.default = searchResults;
 
 /***/ }),
 /* 106 */
@@ -25939,7 +26159,30 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 239 */,
+/* 239 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.getPlaylists = getPlaylists;
+
+var _superagent = __webpack_require__(235);
+
+var _superagent2 = _interopRequireDefault(_superagent);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function getPlaylists(callback) {
+    _superagent2.default.get('/api/v1/playlists').end(function (err, res) {
+        callback(err, res.body);
+    });
+}
+
+/***/ }),
 /* 240 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -25956,133 +26199,7 @@ var _react = __webpack_require__(14);
 
 var _react2 = _interopRequireDefault(_react);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var Header = function (_React$Component) {
-  _inherits(Header, _React$Component);
-
-  function Header() {
-    _classCallCheck(this, Header);
-
-    return _possibleConstructorReturn(this, (Header.__proto__ || Object.getPrototypeOf(Header)).apply(this, arguments));
-  }
-
-  _createClass(Header, [{
-    key: 'render',
-    value: function render() {
-      return _react2.default.createElement(
-        'div',
-        { className: 'container-fluid headerWrapper' },
-        _react2.default.createElement(
-          'div',
-          { className: 'row headerRow' },
-          _react2.default.createElement(
-            'div',
-            { className: 'five columns' },
-            _react2.default.createElement('img', { src: 'https://d30y9cdsu7xlg0.cloudfront.net/png/12992-200.png' })
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'seven columns' },
-            _react2.default.createElement(
-              'div',
-              { className: 'trackPlayingName' },
-              'i\'m the title of a song wee wee wee'
-            )
-          )
-        )
-      );
-    }
-  }]);
-
-  return Header;
-}(_react2.default.Component);
-
-exports.default = Header;
-
-/***/ }),
-/* 241 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(14);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var SearchBar = function (_React$Component) {
-  _inherits(SearchBar, _React$Component);
-
-  function SearchBar() {
-    _classCallCheck(this, SearchBar);
-
-    return _possibleConstructorReturn(this, (SearchBar.__proto__ || Object.getPrototypeOf(SearchBar)).apply(this, arguments));
-  }
-
-  _createClass(SearchBar, [{
-    key: 'render',
-    value: function render() {
-      return _react2.default.createElement(
-        'div',
-        { className: 'container searchBarWrapper' },
-        _react2.default.createElement(
-          'div',
-          { className: 'row searchBarRow' },
-          _react2.default.createElement('input', { className: 'searchInput', type: 'text', placeholder: 'Search for songs' }),
-          _react2.default.createElement(
-            'button',
-            { className: 'searchSubmit' },
-            'Go'
-          )
-        )
-      );
-    }
-  }]);
-
-  return SearchBar;
-}(_react2.default.Component);
-
-exports.default = SearchBar;
-
-/***/ }),
-/* 242 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(14);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _api = __webpack_require__(243);
+var _api = __webpack_require__(239);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -26158,30 +26275,6 @@ var ListPlaylists = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = ListPlaylists;
-
-/***/ }),
-/* 243 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.getPlaylists = getPlaylists;
-
-var _superagent = __webpack_require__(235);
-
-var _superagent2 = _interopRequireDefault(_superagent);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function getPlaylists(callback) {
-    _superagent2.default.get('/api/v1/playlists').end(function (err, res) {
-        callback(err, res.body);
-    });
-}
 
 /***/ })
 /******/ ]);

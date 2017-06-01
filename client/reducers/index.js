@@ -1,7 +1,7 @@
 import {combineReducers} from 'redux'
 
-import subreddits from './subreddits'
+import searchResults from './searchResults'
 
 export default combineReducers({
-  subreddits
+  searchResults
 })
