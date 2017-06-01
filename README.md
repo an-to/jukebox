@@ -24,11 +24,22 @@
 
 
 
-Playlists     Track_Playlist     Track
----------     --------------     ------
-id            id                 id
-name          track_id           name
-              playlist_id
+Playlists    
+--------- 
+- id          
+- name        
+              
+Track_Playlist
+--------------
+- id
+- track_id
+- playlist_id
+
+Track
+------
+- id
+- name
+- (and whatever other info goes here. pls update)
 
 
 ## SoudCloud API:
