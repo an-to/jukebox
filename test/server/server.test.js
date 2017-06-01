@@ -193,3 +193,103 @@ test('Deleted /tracks/:id/delete', t => {
       })
     })
 })
+
+//track_playlist
+// test('GET /track_playlist/:id', t => {
+//   return request(t.context.app)
+//     .get('/api/v1/track_playlist/3')
+//     .expect(200)
+//     .then((res) => {
+//       return new Promise((resolve, reject) => {
+//         t.is(res.body.id, 2)
+//         t.is(res.body.name, 'I am a song')
+//         t.is(res.body.user_id, 1234)
+//         t.is(res.body.user_name, 'I am a user')
+//         t.is(res.body.soundcloud_id, 126777857)
+//         t.is(res.body.permalink_url, 'http://songsongsong.com')
+//         t.is(res.body.artwork_url, 'https://i1.sndcdn.com/artworks-000066429805-wjchtx-large.jpg')
+//         t.is(res.body.genre, 'death metal')
+//         t.is(res.body.stream_url, 'https://api.soundcloud.com/tracks/126777857/stream')
+//         t.is(res.body.streamable, false)
+//         resolve()
+//       })
+//     })
+// })
+
+test('Get /track_playlist', t => {
+  return request(t.context.app)
+    .get('/api/v1/track_playlist')
+    .expect(200)
+    .then((res) => {
+      return new Promise((resolve, reject) => {
+        t.is(res.body.length, 1)
+        resolve()
+      })
+    })
+})
+
+test('Post /track_playlist/add', t => {
+  return request(t.context.app)
+    .post('/api/v1/track_playlist/add')
+    .send({addedTrack})
+    .expect(201)
+    .then((res) => {
+      return t.context.connection('track_playlist').select()
+    })
+    .then((tracks) => {
+      return new Promise((resolve, reject) => {
+        t.is(tracks.length, 4)
+        resolve()
+      })
+    })
+})
+
+test('Put /tracks/:id/update', t => {
+  const updatedTrack = {
+    name: 'Song 2',
+    user_id: 96868,
+    user_name: 'Blur',
+    soundcloud_id: 83002,
+    permalink_url: 'http://updatedpermalink.url',
+    artwork_url: 'http://i.am.image/image.jpg',
+    genre: 'Glam Folk',
+    stream_url: 'http://streamsomeupdatedsongs.com',
+    streamable: false
+  }
+  return request(t.context.app)
+    .put('/api/v1/tracks/3/update')
+    .send(updatedTrack)
+    .expect(204)
+    .then(() => {
+      return t.context.connection('tracks').where('id', 3).first()
+    })
+    .then((res) => {
+      return new Promise((resolve, reject) => {
+        t.is(res.body.name, 'Song 2')
+        t.is(res.body.user_id, 96868)
+        t.is(res.body.user_name, 'Blur')
+        t.is(res.body.soundcloud_id, 83002)
+        t.is(res.body.permalink_url, 'http://updatedpermalink.url')
+        t.is(res.body.artwork_url, 'http://i.am.image/image.jpg')
+        t.is(res.body.genre, 'Glam Folk')
+        t.is(res.body.stream_url, 'http://streamsomeupdatedsongs.com')
+        t.is(res.body.streamable, false)
+        resolve()
+      })
+    })
+})
+
+test('Deleted /tracks/:id/delete', t => {
+  return request(t.context.app)
+    .delete('/api/v1/trakcs/3/delete')
+    .expect(202)
+    .then((res) => {
+      return t.context.connection('tracks').select()
+    })
+    .then((tracks) => {
+      return new Promise((resolve, reject) => {
+        t.is(tracks.length, 2)
+        resolve()
+      })
+    })
+})
