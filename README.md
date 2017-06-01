@@ -24,28 +24,30 @@
 
 
 
-Playlists    
+#### Playlists    
 --------- 
 - id          
 - name        
               
-Track_Playlist
+#### Track_Playlist
 --------------
 - id
 - track_id
 - playlist_id
 
-Track
+#### Track
 ------
 - id
 - name
 - (and whatever other info goes here. pls update)
 
 
+---------------
+
 ## SoudCloud API:
 
 
-### SoundCloud Api for Tracks:
+#### SoundCloud Api for Tracks:
 https://api.soundcloud.com/tracks?client_id=YOUR_CLIENT_ID?q='bad blood’
 
 client_id : MHsPaGAB9flti3yZ6a7bMdgq1GM9n7EL   //required for authorisation to access soundcloud api
@@ -56,7 +58,7 @@ Example:
   q: ‘bad blood’ || 'sherly-chan'
   
 
-### Tracks Properties :
+#### Tracks Properties :
 
 - title : "Say Something (Cover) - A Great Big World ft. Christina Aguilera"
 - permalink_url : 	"https://soundcloud.com/ashestoashesjc/say-something-piano-a-great"   // link to track on soundcloud
@@ -66,7 +68,7 @@ Example:
 - stream_url : https://api.soundcloud.com/tracks/126777857/stream   // this is used for soundcloud play audio widget
 - streamable: true    // is it streamable? 
 
-### Retrieve a Single Track by id :
+#### Retrieve a Single Track by id :
 
 http://api.soundcloud.com/tracks/{id}?client_id=xxxxx
 
@@ -75,8 +77,8 @@ http://api.soundcloud.com/tracks/13158665?client_id=MHsPaGAB9flti3yZ6a7bMdgq1GM9
 
 
 
-#### Tracks API Reference :
+##### Tracks API Reference :
 https://developers.soundcloud.com/docs/api/reference#tracks
 
-#### Search API Reference:
+##### Search API Reference:
 https://developers.soundcloud.com/docs/api/guide#search
