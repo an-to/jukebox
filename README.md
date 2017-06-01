@@ -55,7 +55,7 @@ Example:
 - stream_url : https://api.soundcloud.com/tracks/126777857/stream   // this is used for soundcloud play audio widget
 - streamable: true    // is it streamable? 
 
-### Retrieve a single Track by id :
+### Retrieve a Single Track by id :
 
 http://api.soundcloud.com/tracks/{id}?client_id=xxxxx
 
