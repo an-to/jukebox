@@ -7,7 +7,7 @@ export const receivePosts = (posts) => {
   }
 }
 
-export function fetchPosts (subreddit) {
+export function addPlaylist (subreddit) {
   return (dispatch) => {
     request
       .get(`/api/reddit/subreddit/${subreddit}`)
