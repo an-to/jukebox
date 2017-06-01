@@ -60,9 +60,9 @@ Example:
 
 #### Tracks Properties :
 
-- title : "Say Something (Cover) - A Great Big World ft. Christina Aguilera"
+- name : "Say Something (Cover) - A Great Big World ft. Christina Aguilera"
 - permalink_url : 	"https://soundcloud.com/ashestoashesjc/say-something-piano-a-great"   // link to track on soundcloud
-- id:126777857        // soundcloud id
+- soundcloud_id:126777857        // soundcloud id
 - artwork_url: https://i1.sndcdn.com/artworks-000066429805-wjchtx-large.jpg
 - genre: “piano”
 - stream_url : https://api.soundcloud.com/tracks/126777857/stream   // this is used for soundcloud play audio widget
