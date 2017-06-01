@@ -1,9 +1,16 @@
-import request from 'superagent'
+var request = require('superagent')
 
-export const receivePosts = (posts) => {
+const receiveTracks = (tracks) => {
   return {
-    type: 'RECEIVE_POSTS',
-    posts: posts.map(post => post.data)
+    type: 'RECEIVE_TRACKS',
+    searchResults: tracks.map(track => track)
+  }
+}
+
+const searchError = (message) => {
+  return {
+    type: 'SEARCH_ERROR',
+    message
   }
 }
 
@@ -19,4 +26,28 @@ export function addPlaylist (subreddit) {
         dispatch(receivePosts(res.body))
       })
   }
+}
+
+ function fetchTracks (query) {
+   return (dispatch) => {
+     request
+        .get("http://api.soundcloud.com/tracks")
+        .query({
+            q: query,
+            client_id: "MHsPaGAB9flti3yZ6a7bMdgq1GM9n7EL"
+        })
+        .end((err, res) => {
+         if (err) {
+           dispatch(searchError(err.message))
+         } else {
+           dispatch(receiveTracks(res.body))
+         }
+       })
+   }
+ }
+
+module.exports = {
+    receiveTracks,
+    searchError,
+    fetchTracks
 }
