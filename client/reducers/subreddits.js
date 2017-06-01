@@ -1,8 +1,8 @@
 function subreddits (state = [], action) {
   switch (action.type) {
-    case 'RECEIVE_POSTS':
+    case 'RECEIVE_TRACKS':
       return [
-        ...action.posts
+        ...action.tracks
       ]
 
     default:
