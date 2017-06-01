@@ -31,10 +31,10 @@ name          track_id           name
               playlist_id
 
 
-##SoudCloud API:
+## SoudCloud API:
 
 
-###SoundCloud Api for Tracks:
+### SoundCloud Api for Tracks:
 https://api.soundcloud.com/tracks?client_id=YOUR_CLIENT_ID?q='bad blood’
 
 client_id : MHsPaGAB9flti3yZ6a7bMdgq1GM9n7EL   //required for authorisation to access soundcloud api
@@ -44,14 +44,14 @@ q param which you can use to specify a keyword to search for in fields like titl
 Example: 
   q: ‘bad blood’ || 'sherly-chan'
 
-###Getting Track by id :
+### Getting Track by id :
 
 http://api.soundcloud.com/tracks/{id}?client_id=xxxxx
 example : 
 http://api.soundcloud.com/tracks/13158665?client_id=MHsPaGAB9flti3yZ6a7bMdgq1GM9n7EL
 
 
-###Track Properties :
+### Track Properties :
 
 title : "Say Something (Cover) - A Great Big World ft. Christina Aguilera"
 permalink_url : 	"https://soundcloud.com/ashestoashesjc/say-something-piano-a-great"   // link to track on soundcloud id:126777857        // soundcloud id
@@ -61,8 +61,8 @@ stream_url : https://api.soundcloud.com/tracks/126777857/stream   // this is use
 streamable: true    // is it streamable? 
 
 
-####Tracks API Reference :
+#### Tracks API Reference :
 https://developers.soundcloud.com/docs/api/reference#tracks
 
-####Search API Reference:
+#### Search API Reference:
 https://developers.soundcloud.com/docs/api/guide#search
