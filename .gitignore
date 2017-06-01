@@ -1,4 +1,5 @@
 node_modules
+
+bundle*
+
 *.sqlite3
-bundle.js
-bundle.js.map

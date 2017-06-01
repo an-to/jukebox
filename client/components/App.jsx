@@ -1,15 +1,16 @@
 import React from 'react'
+
 import {HashRouter as Router, Route} from 'react-router-dom'
 
 import Header from './Header'
-import SearchBar from './SearchBar'
+import SearchContainer from '../containers/SearchContainer'
 import Content from './Content'
 import ShowPlaylist from './ShowPlaylist'
 
 const App = () => (
   <div className='app'>
     <Header />
-    <SearchBar />
+    <SearchContainer />
     <Router>
       <Route path='/' component={Content} />
       <Route path='/playlist/:id' component={ShowPlaylist} />
