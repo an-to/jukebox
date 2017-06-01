@@ -9,7 +9,7 @@ test.cb('actions.fetchTracks', t => {
     .get('/tracks?q=banana')
     .reply(200, {data: 'ok, received tracks'})
 
-    actions.fetchPosts('banana')((actual) => {
+    actions.fetchTracks('banana')((actual) => {
     scope.done()
     t.is(actual.type, 'RECEIVE_POSTS')
     t.is(actual.searchResults.length, 1)
