@@ -24,7 +24,7 @@ router.get('/tracks/:id', (req, res) => {
 })
 
 router.post('/playlists/add', (req, res) => {
-  db.addPlaylist(playlistName, req.app.get('connection'))
+  db.addPlaylist(req.body.playlistName, req.app.get('connection'))
     .then(() => {
       res.sendStatus(201)
     })
@@ -32,6 +32,5 @@ router.post('/playlists/add', (req, res) => {
       res.status(500).send('DATABASE ERROR: ' + err.message)
     })
 })
-
 
 module.exports = router
