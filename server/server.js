@@ -5,6 +5,7 @@ var db = require('./db')
 var app = express()
 
 var api = require('./routes/index')
+
 app.use(bodyParser.json())
 app.use('/api/v1', api)
 app.use(express.static(path.join(__dirname, '../public')))

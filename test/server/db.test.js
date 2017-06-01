@@ -88,3 +88,13 @@ test('addTrack adds a track', t => {
       })
     })
 })
+
+test('addPlaylist adds a playlist', t => {
+  const playlistName = {
+    name: 'test playlist'
+  }
+  return db.addPlaylist(playlistName, t.context.db)
+    .then((res) => {
+        t.is(res[0], 2)
+    })
+})
