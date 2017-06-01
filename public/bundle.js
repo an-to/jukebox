@@ -10771,6 +10771,7 @@ exports.addPlaylist = addPlaylist;
 var request = __webpack_require__(235);
 
 var receiveTracks = function receiveTracks(tracks) {
+  console.log(tracks);
   return {
     type: 'RECEIVE_TRACKS',
     searchResults: tracks.map(function (track) {
