@@ -6794,6 +6794,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _react = __webpack_require__(17);
 
 var _react2 = _interopRequireDefault(_react);
@@ -6804,18 +6806,55 @@ var _actions = __webpack_require__(100);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var SearchBar = function SearchBar(_ref) {
-  var dispatch = _ref.dispatch;
-  return _react2.default.createElement(
-    'button',
-    {
-      onClick: function onClick() {
-        return dispatch((0, _actions.fetchTracks)('bad blood'));
-      }
-    },
-    'Fetch Tracks'
-  );
-};
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var SearchBar = function (_React$Component) {
+  _inherits(SearchBar, _React$Component);
+
+  function SearchBar(props) {
+    _classCallCheck(this, SearchBar);
+
+    var _this = _possibleConstructorReturn(this, (SearchBar.__proto__ || Object.getPrototypeOf(SearchBar)).call(this, props));
+
+    _this.state = {
+      query: ''
+    };
+    return _this;
+  }
+
+  _createClass(SearchBar, [{
+    key: 'handleChange',
+    value: function handleChange(e) {
+      this.setState({ query: e.target.value });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
+
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement('input', { type: 'text', name: 'query', value: this.state.query, onChange: this.handleChange.bind(this) }),
+        _react2.default.createElement(
+          'button',
+          {
+            onClick: function onClick() {
+              return _this2.props.dispatch((0, _actions.fetchTracks)(_this2.state.query));
+            }
+          },
+          'Go'
+        )
+      );
+    }
+  }]);
+
+  return SearchBar;
+}(_react2.default.Component);
 
 SearchBar = (0, _reactRedux.connect)()(SearchBar);
 
@@ -10796,19 +10835,9 @@ exports['default'] = thunk;
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.receiveTracks = undefined;
-exports.fetchTracks = fetchTracks;
+var request = __webpack_require__(233);
 
-var _superagent = __webpack_require__(233);
-
-var _superagent2 = _interopRequireDefault(_superagent);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var receiveTracks = exports.receiveTracks = function receiveTracks(tracks) {
+var receiveTracks = function receiveTracks(tracks) {
   return {
     type: 'RECEIVE_TRACKS',
     searchResults: tracks.map(function (track) {
@@ -10826,7 +10855,7 @@ var searchError = function searchError(message) {
 
 function fetchTracks(query) {
   return function (dispatch) {
-    _superagent2.default.get("http://api.soundcloud.com/tracks").query({
+    request.get("http://api.soundcloud.com/tracks").query({
       q: query,
       client_id: "MHsPaGAB9flti3yZ6a7bMdgq1GM9n7EL"
     }).end(function (err, res) {
@@ -10838,6 +10867,12 @@ function fetchTracks(query) {
     });
   };
 }
+
+module.exports = {
+  receiveTracks: receiveTracks,
+  searchError: searchError,
+  fetchTracks: fetchTracks
+};
 
 /***/ }),
 /* 101 */

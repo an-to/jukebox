@@ -1,6 +1,6 @@
-import request from 'superagent'
+var request = require('superagent')
 
-export const receiveTracks = (tracks) => {
+const receiveTracks = (tracks) => {
   return {
     type: 'RECEIVE_TRACKS',
     searchResults: tracks.map(track => track)
@@ -14,7 +14,7 @@ const searchError = (message) => {
   }
 }
 
- export function fetchTracks (query) {
+ function fetchTracks (query) {
    return (dispatch) => {
      request
         .get("http://api.soundcloud.com/tracks")
@@ -31,3 +31,9 @@ const searchError = (message) => {
        })
    }
  }
+
+module.exports = {
+    receiveTracks,
+    searchError,
+    fetchTracks
+}
