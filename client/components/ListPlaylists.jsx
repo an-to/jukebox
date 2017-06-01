@@ -5,12 +5,17 @@ class ListPlaylists extends React.Component {
   constructor() {
     super()
     this.state = {
-      playlists: []
+      playlists: [],
+      viewAddForm: false
     }
   }
 
   componentDidMount () {
     getPlaylists((err, playlists) => this.setState({playlists}))
+  }
+
+  addFormToggle (bool) {
+    this.setState({ viewAddForm: bool})
   }
 
   renderPlaylists (playlists) {
@@ -31,6 +36,9 @@ class ListPlaylists extends React.Component {
   render () {
     return (
       <div className='container'>
+        <div className='row textCenter'>
+          <button className="pinkB" onClick={this.addFormToggle.bind(this, true)}>Add Playlist</button>
+        </div>
         {this.renderPlaylists(this.state.playlists)}
       </div>
     )
