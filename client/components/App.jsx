@@ -1,11 +1,12 @@
 import React from 'react'
 
-import LoadSubreddit from './LoadSubreddit'
-import SubredditContainer from '../containers/SubredditContainer'
+import SearchBar from './SearchBar'
+import SubredditContainer from '../containers/SearchContainer'
 
 const App = () => (
   <div className='app-container'>
-    <LoadSubreddit />
+      WHAT IS GOING ON
+    <SearchBar/>
     <SubredditContainer />
   </div>
 )
