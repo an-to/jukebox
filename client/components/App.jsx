@@ -5,7 +5,6 @@ import SearchContainer from '../containers/SearchContainer'
 
 const App = () => (
   <div className='app-container'>
-    <SearchBar/>
     <SearchContainer />
   </div>
 )

@@ -1,11 +1,9 @@
 import request from 'superagent'
 
 export const receiveTracks = (tracks) => {
-    console.log("receiveTracks")
-    console.log(tracks)
   return {
     type: 'RECEIVE_TRACKS',
-    searchResults: tracks.map(track => track.data)
+    searchResults: tracks.map(track => track)
   }
 }
 

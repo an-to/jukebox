@@ -5,8 +5,6 @@ import {connect} from 'react-redux'
 import SearchBar from '../components/SearchBar'
 
 function mapState2Props(state) {
-    console.log("state")
-    console.log(state)
   return {
     searchResults: state.searchResults
   }
