@@ -1,36 +1,35 @@
 import test from 'ava'
 import request from 'supertest'
 
-import server from '../../server/server'
+import createServer from '../../server/server'
 
+import configureDatabase from './helpers/database-config'
+configureDatabase(test, createServer)
 
-// Tracks
-// test.cb('GET /track/:id', t => {
-//   request(server)
-//     .get('/api/v1/track/2')
-//     .expect(200)
-//     .end((err, res) => {
-//       t.is(res.body.id, 2)
-//       t.is(res.body.name, 'I am a song')
-//       t.is(res  .body.user_id, 1234)
-//       t.is(res.body.user_name, 'I am a user')
-//       t.is(res.body.soundcloud_id, 126777857)
-//       t.is(res.body.permalink_url, 'http://songsongsong.com')
-//       t.is(res.body.artwork_url, 'https://i1.sndcdn.com/artworks-000066429805-wjchtx-large.jpg')
-//       t.is(res.body.genre, 'death metal')
-//       t.is(res.body.stream_url, 'https://api.soundcloud.com/tracks/126777857/stream')
-//       t.is(res.body.streamable, false)
-//       t.ifError(err)
-//       t.end()
-//     })
-// })
+test.cb('GET /tracks/:id', t => {
+  request(t.context.app)
+    .get('/api/v1/tracks/2')
+    .expect(200)
+    .end((err, res) => {
+      t.is(res.body.id, 2)
+      t.is(res.body.name, 'I am a song')
+      t.is(res.body.user_id, 1234)
+      t.is(res.body.user_name, 'I am a user')
+      t.is(res.body.soundcloud_id, 126777857)
+      t.is(res.body.permalink_url, 'http://songsongsong.com')
+      t.is(res.body.artwork_url, 'https://i1.sndcdn.com/artworks-000066429805-wjchtx-large.jpg')
+      t.is(res.body.genre, 'death metal')
+      t.is(res.body.stream_url, 'https://api.soundcloud.com/tracks/126777857/stream')
+      t.ifError(err)
+      t.end()
+    })
+})
 
 test.cb('Get /tracks', t => {
-  request(server)
+  request(t.context.app)
     .get('/api/v1/tracks')
     .expect(200)
     .end((err, res) => {
-      console.log(res);
       t.is(res.body.length, 3)
       t.ifError(err)
       t.end()
