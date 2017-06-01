@@ -26,7 +26,7 @@ test('GET /playlists/:id', t => {
 
 test('Get /playlists', t => {
   return request(t.context.app)
-    .get('/api/v1/playlsits')
+    .get('/api/v1/playlists')
     .expect(200)
     .then((res) => {
       return new Promise((resolve, reject) => {
@@ -47,6 +47,7 @@ test('Post /playlists/add', t => {
     .then((playlists) => {
       return new Promise((resolve, reject) => {
         t.is(playlists.length, 4)
+        resolve()
       })
     })
 })
@@ -62,6 +63,7 @@ test('Put /playlists/:id/update', t => {
     .then((playlist) => {
       return new Promise((resolve, reject) => {
         t.is(playlist.name, 'an updated playlist')
+        resolve()
       })
     })
 })
@@ -80,8 +82,6 @@ test('Deleted /playlists/:id/delete', t => {
       })
     })
 })
-artist
-soundcloud_id
 
 // Tracks
 test('GET /track/:id', t => {
@@ -105,9 +105,9 @@ test('GET /track/:id', t => {
     })
 })
 
-test('Get /playlists', t => {
+test('Get /tracks', t => {
   return request(t.context.app)
-    .get('/api/v1/playlsits')
+    .get('/api/v1/tracks')
     .expect(200)
     .then((res) => {
       return new Promise((resolve, reject) => {
@@ -117,46 +117,78 @@ test('Get /playlists', t => {
     })
 })
 
-test('Post /playlists/add', t => {
+test('Post /tracks/add', t => {
+  const addedTrack = {
+    name: 'Wonderwall',
+    user_id: 1223456,
+    user_name: 'Oasis',
+    soundcloud_id: 8989897923,
+    permalink_url: 'http://permalink.url',
+    artwork_url: 'http://i.am.image/image.jpg',
+    genre: 'Britpop',
+    stream_url: 'http://streamsomesongs.com',
+    streamable: true
+  }
   return request(t.context.app)
-    .post('/api/v1/playlists/add')
-    .send({name: 'my awesome playlist'})
+    .post('/api/v1/tracks/add')
+    .send(addedTrack)
     .expect(201)
-    .then(() => {
-      return t.context.connection('playlists').select()
+    .then((res) => {
+      return t.context.connection('tracks').select()
     })
-    .then((playlists) => {
+    .then((tracks) => {
       return new Promise((resolve, reject) => {
-        t.is(playlists.length, 4)
+        t.is(tracks.length, 4)
+        resolve()
       })
     })
 })
 
-test('Put /playlists/:id/update', t => {
+test('Put /tracks/:id/update', t => {
+  const updatedTrack = {
+    name: 'Song 2',
+    user_id: 96868,
+    user_name: 'Blur',
+    soundcloud_id: 83002,
+    permalink_url: 'http://updatedpermalink.url',
+    artwork_url: 'http://i.am.image/image.jpg',
+    genre: 'Glam Folk',
+    stream_url: 'http://streamsomeupdatedsongs.com',
+    streamable: false
+  }
   return request(t.context.app)
-    .put('/api/v1/playlists/2/update')
-    .send({id: 2, name: 'an updated playlist'})
+    .put('/api/v1/tracks/3/update')
+    .send(updatedTrack)
     .expect(204)
     .then(() => {
-      return t.context.connection('playlists').where('id', 2).first()
+      return t.context.connection('tracks').where('id', 3).first()
     })
-    .then((playlist) => {
+    .then((res) => {
       return new Promise((resolve, reject) => {
-        t.is(playlist.name, 'an updated playlist')
+        t.is(res.body.name, 'Song 2')
+        t.is(res.body.user_id, 96868)
+        t.is(res.body.user_name, 'Blur')
+        t.is(res.body.soundcloud_id, 83002)
+        t.is(res.body.permalink_url, 'http://updatedpermalink.url')
+        t.is(res.body.artwork_url, 'http://i.am.image/image.jpg')
+        t.is(res.body.genre, 'Glam Folk')
+        t.is(res.body.stream_url, 'http://streamsomeupdatedsongs.com')
+        t.is(res.body.streamable, false)
+        resolve()
       })
     })
 })
 
-test('Deleted /playlists/:id/delete', t => {
+test('Deleted /tracks/:id/delete', t => {
   return request(t.context.app)
-    .delete('/api/v1/playlists/3/delete')
+    .delete('/api/v1/trakcs/3/delete')
     .expect(202)
     .then((res) => {
-      return t.context.connection('playlists').select()
+      return t.context.connection('tracks').select()
     })
-    .then((playlists) => {
+    .then((tracks) => {
       return new Promise((resolve, reject) => {
-        t.is(playlists.length, 2)
+        t.is(tracks.length, 2)
         resolve()
       })
     })
