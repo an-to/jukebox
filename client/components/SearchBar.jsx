@@ -12,6 +12,7 @@ class SearchBar extends React.Component {
 
   handleChange (e) {
     this.setState({query: e.target.value})
+    this.props.dispatch(fetchTracks(this.state.query))
   }
 
   handleClick () {
