@@ -95,6 +95,6 @@ test('addPlaylist adds a playlist', t => {
   }
   return db.addPlaylist(playlistName, t.context.db)
     .then((res) => {
-        t.is(res[0], 2)
+      t.is(res[0], 2)
     })
 })

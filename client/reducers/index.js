@@ -5,4 +5,3 @@ import subreddits from './subreddits'
 export default combineReducers({
   subreddits
 })
-
