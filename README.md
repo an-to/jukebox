@@ -61,13 +61,14 @@ Example:
 #### Tracks Properties :
 
 - name : "Say Something (Cover) - A Great Big World ft. Christina Aguilera"
-- user : "someone"  //who produced the track
 - permalink_url : 	"https://soundcloud.com/ashestoashesjc/say-something-piano-a-great"   // link to track on soundcloud
 - soundcloud_id:126777857        // soundcloud id
 - artwork_url: https://i1.sndcdn.com/artworks-000066429805-wjchtx-large.jpg
 - genre: “piano”
 - stream_url : https://api.soundcloud.com/tracks/126777857/stream   // this is used for soundcloud play audio widget
 - streamable: true    // is it streamable? 
+- user_id: 343  //aka. artist
+- user_name: 'Steve' 
 
 #### Retrieve a Single Track by id :
 
