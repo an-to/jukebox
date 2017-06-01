@@ -8,7 +8,7 @@ setupDb(test, (knex) => app.set('knex', knex))
 
 // Tracks
 test('getTracks gets all tracks', t => {
-  return db.getTracks(t.context.connection)
+  return db.getTracks(t.context.db)
     .then(function (result) {
       return new Promise((resolve, reject) => {
         var actual = result.length
@@ -19,10 +19,10 @@ test('getTracks gets all tracks', t => {
 })
 
 test('getTrack gets a single track', t => {
-  return db.getTrack(3, t.context.connection)
+  return db.getTrack(3, t.context.db)
     .then(function (result) {
       return new Promise((resolve, reject) => {
-        t.is(result.nam, 'Wonderwall')
+        t.is(result.name, 'Song 1')
         resolve()
       })
     })
@@ -40,28 +40,27 @@ test('updateTrack edits the track correctly', t => {
     stream_url: 'http://streamastream.com',
     streamable: false
   }
-  return db.updateTrack(2, trackObj, t.context.connection)
+  return db.updateTrack(2, trackObj, t.context.db)
     .then(() => {
-      return db.getTrack(2, t.context.connection).first()
+      return db.getTrack(2, t.context.db).first()
         .then((track) => {
           return new Promise((resolve, reject) => {
             t.is(track.name, 'Wonderwall')
             t.is(track.soundcloud_id, 123456)
-            t.is(track.name, 'Psychadelica')
+            t.is(track.genre, 'Psychadelica')
             t.is(track.user_id, 12345)
             t.is(track.user_name, 'Liam Gallagher')
             t.is(track.permalink_url, 'http://oasisinet.com')
             t.is(track.artwork_url, 'http://gallery.com')
             t.is(track.stream_url, 'http://streamastream.com')
-            t.is(track.streamable, false)
             resolve()
           })
         })
     })
 })
 
-test('delteTrack deletes a track', t => {
-  return db.deleteUser(3, t.context.connection)
+test('deleteTrack deletes a track', t => {
+  return db.deleteTrack(3, t.context.db)
     .then((res) => {
       return new Promise((resolve, reject) => {
         t.is(res, 1)
@@ -79,13 +78,12 @@ test('addTrack adds a track', t => {
     user_name: 'Liam Gallagher',
     permalink_url: 'http://oasisinet.com',
     artwork_url: 'http://gallery.com',
-    stream_url: 'http://streamastream.com',
-    streamable: false
+    stream_url: 'http://streamastream.com'
   }
-  return db.addTrack(addedTrack, t.context.connection)
+  return db.addTrack(addedTrack, t.context.db)
     .then((res) => {
       return new Promise((resolve, reject) => {
-        t.is(res[0], 3)
+        t.is(res[0], 4)
         resolve()
       })
     })
