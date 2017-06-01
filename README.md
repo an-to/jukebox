@@ -61,6 +61,7 @@ Example:
 #### Tracks Properties :
 
 - name : "Say Something (Cover) - A Great Big World ft. Christina Aguilera"
+- user : "someone"  //who produced the track
 - permalink_url : 	"https://soundcloud.com/ashestoashesjc/say-something-piano-a-great"   // link to track on soundcloud
 - soundcloud_id:126777857        // soundcloud id
 - artwork_url: https://i1.sndcdn.com/artworks-000066429805-wjchtx-large.jpg
