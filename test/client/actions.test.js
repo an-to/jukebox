@@ -11,7 +11,7 @@ test.cb('actions.fetchTracks', t => {
 
     actions.fetchTracks('banana')((actual) => {
     scope.done()
-    t.is(actual.type, 'RECEIVE_POSTS')
+    t.is(actual.type, 'RECEIVE_TRACKS')
     t.is(actual.searchResults.length, 1)
     t.is(actual.searchResults[0], 'ok, received tracks')
     t.end()
