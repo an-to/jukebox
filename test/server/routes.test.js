@@ -194,7 +194,7 @@ test('Deleted /tracks/:id/delete', t => {
     })
 })
 
-//track_playlist
+// track_playlist
 // test('GET /track_playlist/:id', t => {
 //   return request(t.context.app)
 //     .get('/api/v1/track_playlist/3')
@@ -231,7 +231,7 @@ test('Get /track_playlist', t => {
 test('Post /track_playlist/add', t => {
   return request(t.context.app)
     .post('/api/v1/track_playlist/add')
-    .send({addedTrack})
+    .send({track_id: 2, playlist_id: 3})
     .expect(201)
     .then((res) => {
       return t.context.connection('track_playlist').select()
