@@ -1,6 +1,7 @@
 var request = require('superagent')
 
 const receiveTracks = (tracks) => {
+    console.log(tracks)
   return {
     type: 'RECEIVE_TRACKS',
     searchResults: tracks.map(track => track)
