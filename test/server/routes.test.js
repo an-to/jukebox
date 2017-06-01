@@ -133,7 +133,7 @@ test('Get /playlists', t => {
     .expect(200)
     .then((res) => {
       return new Promise((resolve, reject) => {
-        t.is(res.body.length, 3)
+        t.is(res.body.length, 1)
         resolve()
       })
     })

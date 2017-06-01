@@ -4,8 +4,11 @@ module.exports = {
   updateTrack,
   deleteTrack,
   addTrack,
-  addPlaylist
+  addPlaylist,
+  getPlaylists
 }
+
+// Tracks
 
 function getTracks (connection) {
   return connection('tracks').select()
@@ -32,7 +35,13 @@ function addTrack (trackObj, connection) {
     .insert(trackObj)
 }
 
+// Playlists
+
 function addPlaylist (playlistName, connection) {
   return connection('playlists')
     .insert(playlistName)
+}
+
+function getPlaylists (connection) {
+  return connection('playlists').select()
 }

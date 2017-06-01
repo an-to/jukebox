@@ -13,6 +13,16 @@ router.get('/tracks', (req, res) => {
     })
 })
 
+router.get('/playlists', (req, res) => {
+  db.getPlaylists(req.app.get('connection'))
+    .then((playlists) => {
+      res.json(playlists)
+    })
+    .catch((err) => {
+      res.status(500).send('DATABASE ERROR: ' + err.message)
+    })
+})
+
 router.get('/tracks/:id', (req, res) => {
   db.getTrack(req.params.id, req.app.get('connection'))
     .then((track) => {
