@@ -1,5 +1,17 @@
 import React from 'react'
 
+const apiKey = 'MHsPaGAB9flti3yZ6a7bMdgq1GM9n7EL'
+
+
+SC.initialize({
+  client_id: apiKey
+});
+
+// player function
+// On clicks for play and pause
+// on clicks for change vol
+// Needs to pass through the track id
+
 class Header extends React.Component {
   render () {
     return (
