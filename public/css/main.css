@@ -1,8 +1,17 @@
 .playlistTitle  {
+  text-decoration: none;
   text-transform: uppercase;
   letter-spacing: .2rem;
   font-weight: 600;
   margin: 8px 0 8px 0;
+  color: white;
+}
+
+a {
+  text-decoration: none;
+}
+
+a.playlistName {
   color: white;
 }
 
