@@ -1,6 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
+import {setCurrentTrack} from '../actions'
+
 
 let SearchResults = (props) => {
   let classes = 'searchResults'
@@ -15,7 +17,8 @@ let SearchResults = (props) => {
                <a href={result.permalink_url}><span>{result.title}</span></a>
            </div>
            <div className="trackAction two columns">
-               <button className="addSong">Play</button>
+              {console.log(result)}
+               <img onClick={() => props.dispatch(setCurrentTrack(result.id))} src='/images/play-arrow.png' className="addSong" />
            </div>
        </div>
         )}
