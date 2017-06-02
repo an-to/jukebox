@@ -11740,7 +11740,8 @@ function fetchTracks(query) {
   return function (dispatch) {
     request.get('http://api.soundcloud.com/tracks').query({
       q: query,
-      client_id: 'MHsPaGAB9flti3yZ6a7bMdgq1GM9n7EL'
+      client_id: 'MHsPaGAB9flti3yZ6a7bMdgq1GM9n7EL',
+      limit: 10
     }).end(function (err, res) {
       if (err) {
         dispatch(searchError(err.message));
@@ -11796,6 +11797,10 @@ var _react = __webpack_require__(5);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _soundcloudAudio = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"soundcloud-audio\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+
+var _soundcloudAudio2 = _interopRequireDefault(_soundcloudAudio);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -11807,13 +11812,35 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Header = function (_React$Component) {
   _inherits(Header, _React$Component);
 
-  function Header() {
+  function Header(props) {
     _classCallCheck(this, Header);
 
-    return _possibleConstructorReturn(this, (Header.__proto__ || Object.getPrototypeOf(Header)).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, (Header.__proto__ || Object.getPrototypeOf(Header)).call(this, props));
+
+    _this.state = {
+      trackId: null,
+      error: null
+    };
+    _this.scPlayer = new _soundcloudAudio2.default('MHsPaGAB9flti3yZ6a7bMdgq1GM9n7EL');
+    return _this;
   }
 
   _createClass(Header, [{
+    key: 'pauseTrack',
+    value: function pauseTrack() {
+      this.scPlayer.pause();
+    }
+  }, {
+    key: 'playTrack',
+    value: function playTrack(trackId) {
+      this.scPlayer.play({ streamUrl: 'https://api.soundcloud.com/tracks/' + trackId + '/stream' });
+    }
+  }, {
+    key: 'componentDidMount',
+    value: function componentDidMount(trackId) {
+      this.setState({ trackId: 126777857 });
+    }
+  }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
@@ -11834,6 +11861,16 @@ var Header = function (_React$Component) {
               'div',
               { className: 'trackPlayingName' },
               'i\'m the title of a song wee wee wee'
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'player' },
+              _react2.default.createElement(
+                'ul',
+                null,
+                _react2.default.createElement('img', { src: '/images/play-arrow.png', className: 'pinkB', id: 'playTrack', onClick: this.playTrack.bind(this, this.state.trackId) }),
+                _react2.default.createElement('img', { src: '/images/pause-button.png', className: 'pinkB', id: 'pauseTrack', onClick: this.pauseTrack.bind(this) })
+              )
             )
           )
         )
@@ -11866,6 +11903,10 @@ var _react2 = _interopRequireDefault(_react);
 var _reactRedux = __webpack_require__(38);
 
 var _actions = __webpack_require__(110);
+
+var _SearchResults = __webpack_require__(279);
+
+var _SearchResults2 = _interopRequireDefault(_SearchResults);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -11905,20 +11946,17 @@ var SearchBar = function (_React$Component) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        null,
+        { className: 'container searchBarWrapper' },
         _react2.default.createElement(
           'div',
-          { className: 'container searchBarWrapper' },
+          { className: 'row searchBarRow' },
+          _react2.default.createElement('input', { className: 'searchInput', type: 'text', placeholder: 'Search for songs', value: this.state.query, onChange: this.handleChange.bind(this) }),
           _react2.default.createElement(
-            'div',
-            { className: 'row searchBarRow' },
-            _react2.default.createElement('input', { className: 'searchInput', type: 'text', placeholder: 'Search for songs', value: this.state.query, onChange: this.handleChange.bind(this) }),
-            _react2.default.createElement(
-              'button',
-              { className: 'searchSubmit pinkB', onClick: this.handleClick.bind(this) },
-              'Go'
-            )
-          )
+            'button',
+            { className: 'searchSubmit pinkB', onClick: this.handleClick.bind(this) },
+            'Go'
+          ),
+          _react2.default.createElement(_SearchResults2.default, { displaySongs: this.state.query })
         )
       );
     }
@@ -29594,6 +29632,73 @@ var ListPlaylists = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = ListPlaylists;
+
+/***/ }),
+/* 279 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _react = __webpack_require__(5);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRedux = __webpack_require__(38);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var SearchResults = function SearchResults(props) {
+    var classes = 'searchResults';
+    if (props.displaySongs === '') {
+        classes = 'searchResults hidden';
+    }
+    return _react2.default.createElement(
+        'div',
+        { className: classes },
+        props.searchResults.map(function (result) {
+            return _react2.default.createElement(
+                'div',
+                { className: 'track row', key: result.id },
+                _react2.default.createElement(
+                    'div',
+                    { className: 'trackDescription ten columns' },
+                    _react2.default.createElement(
+                        'a',
+                        { href: result.permalink_url },
+                        _react2.default.createElement(
+                            'span',
+                            null,
+                            result.title
+                        )
+                    )
+                ),
+                _react2.default.createElement(
+                    'div',
+                    { className: 'trackAction two columns' },
+                    _react2.default.createElement(
+                        'button',
+                        { className: 'addSong' },
+                        'Play'
+                    )
+                )
+            );
+        })
+    );
+};
+
+var mapState2Props = function mapState2Props(state) {
+    return {
+        searchResults: state.searchResults
+    };
+};
+
+SearchResults = (0, _reactRedux.connect)(mapState2Props)(SearchResults);
+exports.default = SearchResults;
 
 /***/ })
 /******/ ]);
