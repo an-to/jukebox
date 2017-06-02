@@ -9,6 +9,11 @@ import App from '../../client/components/App'
 
 App.prototype.componentDidMount = () => {}
 
+test('Renders player', t => {
+  const wrapper = mount(<App />)
+  t.is(wrapper.find('.player').exists(), true)
+})
+
 test('playTrack function fires when play link clicked', t => {
   const wrapper = mount(<App />)
 
@@ -27,11 +32,4 @@ test('pauseTrack function fires when play link clicked', t => {
 
   wrapper.find('#pauseTrack').simulate('click')
   t.is(app.pauseTrack.called, true)
-})
-
-
-test('<App />', t => {
-  const expected = 'React development has begun!'
-  const wrapper = mount(<App />)
-  t.is(wrapper.text(), expected)
 })
