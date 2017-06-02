@@ -53,9 +53,7 @@ function fetchPlaylistTracks (id) {
         .get(`/api/v1/playlist/${id}`)
         .end((err, res) => {
           if (err) {
-            console.log(err.message)
           } else {
-            console.log(res.body)
             dispatch(receivePlaylistTracks(res.body))
           }
         })

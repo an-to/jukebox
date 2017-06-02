@@ -1,6 +1,8 @@
 import React from 'react'
 import SoundCloudAudio from 'soundcloud-audio'
 
+import {connect} from 'react-redux'
+
 class Header extends React.Component {
   constructor (props) {
     super(props)
@@ -15,12 +17,15 @@ class Header extends React.Component {
     this.scPlayer.pause()
   }
 
-  playTrack (trackId) {
-    this.scPlayer.play({streamUrl: `https://api.soundcloud.com/tracks/${trackId}/stream`})
+  playTrack (props) {
+    this.scPlayer.play({streamUrl: `https://api.soundcloud.com/tracks/${props.currentTrack.result.id}/stream`})
   }
 
   componentDidMount (trackId) {
     this.setState({trackId: 126777857})
+  }
+  componentWillReceiveProps(props) {
+    this.playTrack(props)
   }
 
   render () {
@@ -32,11 +37,12 @@ class Header extends React.Component {
           </div>
           <div className='seven columns'>
             <div className='trackPlayingName'>
-              i'm the title of a song wee wee wee
+              {console.log(this.props)}
+              {this.props.currentTrack.result ? this.props.currentTrack.result.title : 'No track loaded'}
             </div>
             <div className='player'>
               <ul>
-                <img src='/images/play-arrow.png' className='pinkB' id='playTrack' onClick={this.playTrack.bind(this, this.state.trackId)} />
+                <img src='/images/play-arrow.png' className='pinkB' id='playTrack' onClick={this.playTrack.bind(this)} />
                 <img src='/images/pause-button.png' className='pinkB' id='pauseTrack' onClick={this.pauseTrack.bind(this)} />
               </ul>
             </div>
@@ -47,4 +53,10 @@ class Header extends React.Component {
   }
 }
 
-export default Header
+function mapState2Props (state) {
+  return {
+    currentTrack: state.currentTrack
+  }
+}
+
+export default connect(mapState2Props)(Header)
