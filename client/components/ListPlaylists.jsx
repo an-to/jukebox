@@ -1,5 +1,6 @@
 import React from 'react'
 import { getPlaylists, addPlaylist } from '../api.js'
+import { Link } from 'react-router-dom'
 
 class ListPlaylists extends React.Component {
   constructor () {
@@ -40,7 +41,7 @@ class ListPlaylists extends React.Component {
       return (
         <div className='row contentList' key={playlist.id}>
           <div className='nine columns'>
-            <h4 className='playlistTitle'>{playlist.name}</h4>
+            <h4 className='playlistTitle'><Link to={`/playlist/${playlist.id}`} className="playlistName">{playlist.name}</Link></h4>
           </div>
           <div className='three columns'>
             <div className='description'>{playlist.id}</div>
