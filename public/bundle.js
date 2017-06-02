@@ -11661,6 +11661,10 @@ var _searchResults = __webpack_require__(117);
 
 var _searchResults2 = _interopRequireDefault(_searchResults);
 
+var _currentTrack = __webpack_require__(280);
+
+var _currentTrack2 = _interopRequireDefault(_currentTrack);
+
 var _showPlaylist = __webpack_require__(118);
 
 var _showPlaylist2 = _interopRequireDefault(_showPlaylist);
@@ -11669,7 +11673,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 exports.default = (0, _redux.combineReducers)({
   searchResults: _searchResults2.default,
-  showPlaylist: _showPlaylist2.default
+  showPlaylist: _showPlaylist2.default,
+  currentTrack: _currentTrack2.default
 });
 
 /***/ }),
@@ -11729,6 +11734,13 @@ var receiveTracks = function receiveTracks(tracks) {
   };
 };
 
+var setCurrentTrack = function setCurrentTrack(currentTrack) {
+  return {
+    type: 'SET_CURRENT_TRACK',
+    currentTrack: currentTrack
+  };
+};
+
 var searchError = function searchError(message) {
   return {
     type: 'SEARCH_ERROR',
@@ -11776,7 +11788,8 @@ module.exports = {
   receiveTracks: receiveTracks,
   searchError: searchError,
   fetchTracks: fetchTracks,
-  fetchPlaylistTracks: fetchPlaylistTracks
+  fetchPlaylistTracks: fetchPlaylistTracks,
+  setCurrentTrack: setCurrentTrack
 };
 
 /***/ }),
@@ -29650,6 +29663,8 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = __webpack_require__(38);
 
+var _actions = __webpack_require__(110);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var SearchResults = function SearchResults(props) {
@@ -29680,11 +29695,9 @@ var SearchResults = function SearchResults(props) {
                 _react2.default.createElement(
                     'div',
                     { className: 'trackAction two columns' },
-                    _react2.default.createElement(
-                        'button',
-                        { className: 'addSong' },
-                        'Play'
-                    )
+                    _react2.default.createElement('img', { onClick: function onClick() {
+                            return props.dispatch((0, _actions.setCurrentTrack)(result.id));
+                        }, src: '/images/play-arrow.png', className: 'addSong' })
                 )
             );
         })
@@ -29699,6 +29712,31 @@ var mapState2Props = function mapState2Props(state) {
 
 SearchResults = (0, _reactRedux.connect)(mapState2Props)(SearchResults);
 exports.default = SearchResults;
+
+/***/ }),
+/* 280 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+function currentTrack() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+  var action = arguments[1];
+
+  console.log(action);
+  switch (action.type) {
+    case 'SET_CURRENT_TRACK':
+      return action.currentTrack;
+    default:
+      return state;
+  }
+}
+
+exports.default = currentTrack;
 
 /***/ })
 /******/ ]);
