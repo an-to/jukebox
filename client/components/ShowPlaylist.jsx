@@ -1,7 +1,7 @@
 import React from 'react'
 
 import {connect} from 'react-redux'
-import {fetchPlaylistTracks} from '../actions/index'
+import {fetchPlaylistTracks, setCurrentTrack} from '../actions/index'
 
 class ShowPlaylist extends React.Component {
 
@@ -18,13 +18,16 @@ class ShowPlaylist extends React.Component {
   }
 
   renderSongs() {
-    return this.props.playlistTracks.map((track) => {
-      return (<div className='row contentList' key={track.id}>
-         <div className='nine columns'>
-           <h4 className='playlistTitle'>{track.name}</h4>
+    return this.props.playlistTracks.map((result) => {
+      return (<div className='row contentList' key={result.id}>
+         <div className='seven columns'>
+           <h4 className='playlistTitle'>{result.name}</h4>
          </div>
          <div className='three columns'>
-           <div className='description'>{track.user_name}</div>
+           <div className='description'>{result.user_name}</div>
+         </div>
+         <div className='three columns'>
+           <div className='play'><img onClick={() => this.props.dispatch(setCurrentTrack({result}))} src='/images/play-arrow.png' /></div>
          </div>
        </div>)
     })

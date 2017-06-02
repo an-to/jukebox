@@ -34,7 +34,7 @@ class SearchResults extends React.Component{
                  <a href={result.permalink_url}><span>{result.title}</span></a>
              </div>
              <div className="trackAction two columns">
-               <img onClick={() => this.props.dispatch(setCurrentTrack(result.id))} src='/images/play-arrow.png' className="addSong" />
+               <img onClick={() => this.props.dispatch(setCurrentTrack({result}))} src='/images/play-arrow.png' className="addSong" />
                <button className={classesAdd} onClick={this.addSong.bind(this, result)}>ADD</button>
              </div>
          </div>

@@ -1,4 +1,4 @@
-function currentTrack (state = null, action) {
+function currentTrack (state = {result: {}}, action) {
   switch (action.type) {
     case 'SET_CURRENT_TRACK':
       return action.currentTrack
