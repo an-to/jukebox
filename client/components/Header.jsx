@@ -11,25 +11,17 @@ class Header extends React.Component {
     this.scPlayer = new SoundCloudAudio('MHsPaGAB9flti3yZ6a7bMdgq1GM9n7EL')
   }
 
-  getTrack(id) {
-    this.scPlayer.preload({streamUrl: `https://api.soundcloud.com/tracks/${id}/stream`})
-  }
-
-  pauseTrack(id) {
+  pauseTrack() {
     this.scPlayer.pause()
   }
 
   playTrack(id) {
-    this.scPlayer.play({streamUrl: `https://api.soundcloud.com/tracks/${id}/stream`})
+    this.scPlayer.play({streamUrl: `https://api.soundcloud.com/tracks/${track_id}/stream`})
   }
 
-  componentDidMount() {
-    this.getTrack(126777857)
+  componentDidMount(track_id) {
+    this.scPlayer.preLoad(`https://api.soundcloud.com/tracks/${track_id}/stream`)
   }
-
-
-
-
 
   render () {
     return (
@@ -44,8 +36,8 @@ class Header extends React.Component {
             </div>
             <div className='player'>
               <ul>
-                <li onClick={this.playTrack(126777857)}>play</li>
-                <li onClick={this.pauseTrack()}>pause</li>
+                <li onClick={this.playTrack.bind(this, this.state.track_id)}>play</li>
+                <li onClick={this.pauseTrack.bind(this)}>pause</li>
                 <li>vol +</li>
                 <li>vol -</li>
               </ul>
