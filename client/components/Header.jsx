@@ -1,5 +1,6 @@
 import React from 'react'
 import SoundCloudAudio from 'soundcloud-audio'
+import { HashRouter as Router, Link } from 'react-router-dom'
 
 class Header extends React.Component {
   constructor (props) {
@@ -28,7 +29,7 @@ class Header extends React.Component {
       <div className='container-fluid headerWrapper'>
         <div className='row headerRow'>
           <div className='five columns'>
-            <img src='http://icons.iconarchive.com/icons/troyboydesign/sea-creatures/256/Squid-icon.png' width='200px' />
+            <Link to='/'><img src='http://icons.iconarchive.com/icons/troyboydesign/sea-creatures/256/Squid-icon.png' width='200px' /></Link>
           </div>
           <div className='seven columns'>
             <div className='trackPlayingName'>
