@@ -7,6 +7,13 @@ const receiveTracks = (tracks) => {
   }
 }
 
+const setCurrentTrack = (currentTrack) => {
+  return {
+    type: 'SET_CURRENT_TRACK',
+    currentTrack
+  }
+}
+
 const searchError = (message) => {
   return {
     type: 'SEARCH_ERROR',
@@ -36,5 +43,6 @@ function fetchTracks (query) {
 module.exports = {
   receiveTracks,
   searchError,
-  fetchTracks
+  fetchTracks,
+  setCurrentTrack
 }
