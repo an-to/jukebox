@@ -11760,10 +11760,11 @@ var receivePlaylistTracks = function receivePlaylistTracks(playlistTracks) {
 
 function fetchPlaylistTracks(id) {
   return function (dispatch) {
-    request.get('/playlist/' + id).end(function (err, res) {
+    request.get('/api/v1/playlist/' + id).end(function (err, res) {
       if (err) {
         console.log(err.message);
       } else {
+        console.log(res.body);
         dispatch(receivePlaylistTracks(res.body));
       }
     });
@@ -11946,6 +11947,10 @@ var _react = __webpack_require__(5);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactRedux = __webpack_require__(38);
+
+var _index = __webpack_require__(110);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -11972,8 +11977,12 @@ var ShowPlaylist = function (_React$Component) {
   _createClass(ShowPlaylist, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      console.log(this.state.id);
-      dispatch(fetchPlaylistTracks(id));
+      this.props.dispatch((0, _index.fetchPlaylistTracks)(this.state.id));
+    }
+  }, {
+    key: 'renderSongs',
+    value: function renderSongs() {
+      console.log(this.state.playlistTracks);
     }
   }, {
     key: 'render',
@@ -11982,13 +11991,21 @@ var ShowPlaylist = function (_React$Component) {
         'div',
         null,
         console.log(this.state.playlistTracks),
-        'hi'
+        this.state.playlistTracks.length > 0 ? this.renderSongs() : console.log('error')
       );
     }
   }]);
 
   return ShowPlaylist;
 }(_react2.default.Component);
+
+var mapState2Props = function mapState2Props(state) {
+  return {
+    playlistTracks: state.playlistTracks
+  };
+};
+
+ShowPlaylist = (0, _reactRedux.connect)(mapState2Props)(ShowPlaylist);
 
 exports.default = ShowPlaylist;
 
@@ -12110,7 +12127,6 @@ function showPlaylist() {
 
   switch (action.type) {
     case 'RECEIVE_PLAYLIST_TRACKS':
-      console.log(action);
       return [].concat(_toConsumableArray(action.playlistTracks));
 
     default:
