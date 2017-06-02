@@ -1,26 +1,47 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {setCurrentTrack} from '../actions'
+import { addSong } from '../api.js'
 
-let SearchResults = (props) => {
-  let classes = 'searchResults'
-  if (props.displaySongs === '') {
-    classes = 'searchResults hidden'
+
+class SearchResults extends React.Component{
+  constructor(props) {
+    super(props)
   }
-  return (
-    <div className={classes}>
-      {props.searchResults.map((result) =>
-       <div className="track row" key={result.id}>
-           <div className="trackDescription ten columns">
-               <a href={result.permalink_url}><span>{result.title}</span></a>
-           </div>
-           <div className="trackAction two columns">
-               <img onClick={() => props.dispatch(setCurrentTrack(result.id))} src='/images/play-arrow.png' className="addSong" />
-           </div>
-       </div>
-        )}
-    </div>
-  )
+
+  addSong(result) {
+    let playlistId = location.hash.split('/').pop()
+    addSong(result, playlistId, console.log)
+  }
+
+  render () {
+
+    let classes = 'searchResults'
+    let classesAdd = 'addSong hidden'
+    if (this.props.displaySongs === '') {
+      classes = 'searchResults hidden'
+    }
+
+    if (location.hash !== '#/') {
+      classesAdd = 'addSong'
+    }
+
+    return (
+      <div className={classes}>
+        {this.props.searchResults.map((result) =>
+         <div className="track row" key={result.id}>
+             <div className="trackDescription ten columns">
+                 <a href={result.permalink_url}><span>{result.title}</span></a>
+             </div>
+             <div className="trackAction two columns">
+               <img onClick={() => this.props.dispatch(setCurrentTrack(result.id))} src='/images/play-arrow.png' className="addSong" />
+               <button className={classesAdd} onClick={this.addSong.bind(this, result)}>ADD</button>
+             </div>
+         </div>
+          )}
+      </div>
+    )
+  }
 }
 
 const mapState2Props = (state) => {
