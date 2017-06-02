@@ -13,6 +13,11 @@ input[type="text"].searchInput {
   border-bottom-right-radius: 0;
   border-top-right-radius: 0;
   transition: all 0.1s ease-in;
+  margin-bottom: 0;
+}
+
+.hidden {
+  display: none;
 }
 
 input[type="text"].searchInput:focus {
@@ -22,6 +27,21 @@ input[type="text"].searchInput:focus {
 
 input[type="text"].searchInput:focus + .searchSubmit {
   border-color: deeppink;
+}
+
+.searchResults {
+  background-color: blue;
+  position: absolute;
+  z-index: 999;
+  width: 100%;
+  background-color: pink;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  border: 1px #FFA7B6 solid;
+}
+
+.track {
+  margin: 5px;
 }
 
 .headerWrapper {
@@ -36,19 +56,26 @@ input[type="text"].searchInput:focus + .searchSubmit {
   box-shadow: inset 0 1px white;
 }
 
-.searchSubmit {
-  width: 20%;
-  margin:0;
+.textCenter {
+  text-align: center;
+}
+
+button.pinkB {
   background-color: pink;
   border: 1px #FFA7B6 solid;
-  border-left: none;
-  border-bottom-left-radius: 0;
-  border-top-left-radius: 0;
   transition: all 0.1s ease-in;
   box-shadow: inset 0 1px 0 #FFF3F5;
 }
 
-.searchSubmit:hover {
+.pinkB.searchSubmit {
+  width: 20%;
+  margin:0;
+  border-left: none;
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+}
+
+button.pinkB:hover {
   background-color: #FFA7B6;
   border-color: deeppink;
 }

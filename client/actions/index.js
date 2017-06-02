@@ -20,7 +20,8 @@ function fetchTracks (query) {
         .get('http://api.soundcloud.com/tracks')
         .query({
           q: query,
-          client_id: 'MHsPaGAB9flti3yZ6a7bMdgq1GM9n7EL'
+          client_id: 'MHsPaGAB9flti3yZ6a7bMdgq1GM9n7EL',
+          limit: 10
         })
         .end((err, res) => {
           if (err) {
