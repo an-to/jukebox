@@ -12,11 +12,11 @@ class ListPlaylists extends React.Component {
   }
 
   componentDidMount () {
-    getPlaylists((err, playlists) => this.setState({playlists}))
+    getPlaylists((err, playlists) => this.setState({ playlists }))
   }
 
   addFormToggle (bool) {
-    this.setState({ viewAddForm: bool})
+    this.setState({ viewAddForm: bool })
   }
 
   handleChange (e) {
