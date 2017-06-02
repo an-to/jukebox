@@ -18,12 +18,21 @@ class ShowPlaylist extends React.Component {
   }
 
   renderSongs() {
-    console.log(this.props.playlistTracks);
+    return this.props.playlistTracks.map((track) => {
+      return (<div className='row contentList' key={track.id}>
+         <div className='nine columns'>
+           <h4 className='playlistTitle'>{track.name}</h4>
+         </div>
+         <div className='three columns'>
+           <div className='description'>{track.user_name}</div>
+         </div>
+       </div>)
+    })
   }
 
   render () {
     return (
-      <div>
+      <div className='container'>
         {this.renderSongs()}
       </div>
     )

@@ -43,6 +43,7 @@ function getPlaylistTracks (id, connection) {
   return connection('playlists')
     .where('playlists.id', id)
     .join('track_playlist', 'playlist_id', '=', 'playlists.id')
+    .join('tracks', 'tracks.id', '=', 'track_id')
 }
 
 function addPlaylist (playlistName, connection) {

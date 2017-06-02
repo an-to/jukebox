@@ -11982,14 +11982,37 @@ var ShowPlaylist = function (_React$Component) {
   }, {
     key: 'renderSongs',
     value: function renderSongs() {
-      console.log(this.props.playlistTracks);
+      return this.props.playlistTracks.map(function (track) {
+        return _react2.default.createElement(
+          'div',
+          { className: 'row contentList', key: track.id },
+          _react2.default.createElement(
+            'div',
+            { className: 'nine columns' },
+            _react2.default.createElement(
+              'h4',
+              { className: 'playlistTitle' },
+              track.name
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'three columns' },
+            _react2.default.createElement(
+              'div',
+              { className: 'description' },
+              track.user_name
+            )
+          )
+        );
+      });
     }
   }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
         'div',
-        null,
+        { className: 'container' },
         this.renderSongs()
       );
     }
