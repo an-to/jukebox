@@ -73,3 +73,12 @@ body {
   align-items: center;
   border-bottom: 1px solid pink;
 }
+
+.track {
+    display: flex;
+}
+
+.trackAction {
+    justify-content: flex-end;
+
+}
