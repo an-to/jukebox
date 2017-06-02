@@ -39,7 +39,9 @@ function addTrack (trackObj, connection) {
 
 function addPlaylist (playlistName, connection) {
   return connection('playlists')
-    .insert(playlistName)
+    .insert({
+      name: playlistName
+    })
 }
 
 function getPlaylists (connection) {

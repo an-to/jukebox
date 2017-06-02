@@ -38,7 +38,7 @@ router.post('/playlists/add', (req, res) => {
     .then(() => {
       res.sendStatus(201)
     })
-    .catch(function (err) {
+    .catch((err) => {
       res.status(500).send('DATABASE ERROR: ' + err.message)
     })
 })

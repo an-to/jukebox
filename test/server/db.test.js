@@ -104,7 +104,7 @@ test('addPlaylist adds a playlist', t => {
 test('getPlaylists gets all playlists', t => {
   return db.getPlaylists(t.context.db)
     .then(function (result) {
-        var actual = result.length
-        t.is(actual, 1)
+      var actual = result.length
+      t.is(actual, 1)
     })
 })

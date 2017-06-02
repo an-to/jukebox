@@ -127,7 +127,7 @@ test('GET /playlists/:id', t => {
     })
 })
 
-test('Get /playlists', t => {
+test.serial('Get /playlists', t => {
   return request(t.context.app)
     .get('/api/v1/playlists')
     .expect(200)
@@ -139,19 +139,16 @@ test('Get /playlists', t => {
     })
 })
 
-test('Post /playlists/add', t => {
+test.serial('Post /playlists/add', t => {
   return request(t.context.app)
     .post('/api/v1/playlists/add')
-    .send({name: 'my awesome playlist'})
+    .send({playlistName: 'my awesome playlist'})
     .expect(201)
     .then(() => {
       return t.context.connection('playlists').select()
     })
     .then((playlists) => {
-      return new Promise((resolve, reject) => {
-        t.is(playlists.length, 4)
-        resolve()
-      })
+      t.is(playlists.length, 2)
     })
 })
 
