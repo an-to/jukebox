@@ -13,7 +13,7 @@ const App = () => (
     <SearchContainer />
     <Router>
       <span>
-        <Route path='/' component={Content} />
+        <Route exact path='/' component={Content} />
         <Route path='/playlist/:id' component={ShowPlaylist} />
       </span>
     </Router>

@@ -4,7 +4,7 @@ import ShowPlaylist from '../components/ShowPlaylist'
 
 function mapState2Props (state) {
   return {
-    songs: state.songs
+    playlistTracks: state.playlistTracks
   }
 }
 

@@ -6,23 +6,19 @@ class ShowPlaylist extends React.Component {
     super(props)
     this.state = {
       id: props.match.params.id,
-      songs: []
+      playlistTracks: []
     }
   }
 
   componentDidMount () {
     console.log(this.state.id)
-    api.getSongs(id, (error, songs) => {
-      if (error) {
-        console.log(error)
-      } else {
-        this.setState({songs})
-      })
+    dispatch(fetchPlaylistTracks(id))
   }
 
   render () {
     return (
       <div>
+        {console.log(this.state.playlistTracks)}
         hi
       </div>
     )

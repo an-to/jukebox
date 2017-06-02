@@ -1,9 +1,9 @@
-function searchResults (state = [], action) {
+function showPlaylist (state = [], action) {
   switch (action.type) {
-    case 'RECEIVE_TRACKS':
+    case 'RECEIVE_PLAYLIST_TRACKS':
       console.log(action)
       return [
-        ...action.searchResults
+        ...action.playlistTracks
       ]
 
     default:
@@ -11,4 +11,4 @@ function searchResults (state = [], action) {
   }
 }
 
-export default searchResults
+export default showPlaylist

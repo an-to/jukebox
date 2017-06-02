@@ -32,10 +32,10 @@ function fetchTracks (query) {
   }
 }
 
-receivePlaylistTracks(songs){
+const receivePlaylistTracks = (playlistTracks) => {
   return {
     type: 'RECEIVE_PLAYLIST_TRACKS',
-    songs: songs
+    playlistTracks
   }
 }
 
@@ -56,5 +56,6 @@ function fetchPlaylistTracks (id) {
 module.exports = {
   receiveTracks,
   searchError,
-  fetchTracks
+  fetchTracks,
+  fetchPlaylistTracks
 }
