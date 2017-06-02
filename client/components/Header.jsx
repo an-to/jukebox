@@ -37,7 +37,6 @@ class Header extends React.Component {
           </div>
           <div className='seven columns'>
             <div className='trackPlayingName'>
-              {console.log(this.props)}
               {this.props.currentTrack.result ? this.props.currentTrack.result.title : 'No track loaded'}
             </div>
             <div className='player'>
