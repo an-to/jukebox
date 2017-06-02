@@ -5,9 +5,8 @@
   "main": "server/index",
   "scripts": {
     "knex": "knex",
-    "test": "standard | snazzy && node ava  -v 'test/**/*.test.js'",
-    "clientapitest": "ava -v test/client/actions.test.js",
     "test": "standard | snazzy & ava  -v 'test/**/*.test.js'",
+    "clientapitest": "ava -v test/client/actions.test.js",
     "start": "node server server/index",
     "eslint": "eslint src",
     "dev": "nodemon --watch server server/index & webpack --watch"
@@ -59,7 +58,8 @@
     "body-parser": "^1.17.2",
     "express": "^4.15.3",
     "knex": "^0.13.0",
-    "superagent": "^2.2.0",
-    "sqlite3": "^3.1.8"
+    "soundcloud-audio": "^1.1.0",
+    "sqlite3": "^3.1.8",
+    "superagent": "^2.2.0"
   }
 }
