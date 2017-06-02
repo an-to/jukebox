@@ -12,6 +12,7 @@ class SearchBar extends React.Component {
 
   handleChange (e) {
     this.setState({query: e.target.value})
+    this.props.dispatch(fetchTracks(this.state.query))
   }
 
   handleClick () {
@@ -24,7 +25,7 @@ class SearchBar extends React.Component {
         <div className='container searchBarWrapper'>
           <div className='row searchBarRow'>
             <input className='searchInput' type='text' placeholder='Search for songs' value={this.state.query} onChange={this.handleChange.bind(this)} />
-            <button className='searchSubmit' onClick={this.handleClick.bind(this)}>Go</button>
+            <button className='searchSubmit pinkB' onClick={this.handleClick.bind(this)}>Go</button>
           </div>
         </div>
       </div>

@@ -36,7 +36,7 @@ class Header extends React.Component {
       <div className='container-fluid headerWrapper'>
         <div className='row headerRow'>
           <div className='five columns'>
-            <img src='https://d30y9cdsu7xlg0.cloudfront.net/png/12992-200.png' />
+            <img src='http://icons.iconarchive.com/icons/troyboydesign/sea-creatures/256/Squid-icon.png' width='200px' />
           </div>
           <div className='seven columns'>
             <div className='trackPlayingName'>
