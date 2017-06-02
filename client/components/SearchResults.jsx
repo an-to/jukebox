@@ -15,7 +15,7 @@ let SearchResults = (props) => {
                <a href={result.permalink_url}><span>{result.title}</span></a>
            </div>
            <div className="trackAction two columns">
-               <img onClick={() => props.dispatch(setCurrentTrack(result.id))} src='/images/play-arrow.png' className="addSong" />
+               <img onClick={() => props.dispatch(setCurrentTrack({result}))} src='/images/play-arrow.png' className="addSong" />
            </div>
        </div>
         )}
