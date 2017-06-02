@@ -19,15 +19,15 @@ class Header extends React.Component {
   }
 
   playTrack (props) {
-    console.log(props);
-    this.scPlayer.play({streamUrl: `https://api.soundcloud.com/tracks/${props.currentTrack.result.id}/stream`})
+    this.scPlayer.play({streamUrl: `${props.currentTrack.result.stream_url}`})
   }
 
   componentDidMount (trackId) {
     this.setState({trackId: 126777857})
   }
   componentWillReceiveProps(props) {
-    this.playTrack(props)
+
+     this.playTrack(props)
   }
 
   render () {
