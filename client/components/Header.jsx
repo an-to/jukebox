@@ -21,7 +21,6 @@ class Header extends React.Component {
 
   componentDidMount (trackId) {
     this.setState({trackId: 126777857})
-    this.scPlayer.preLoad(`https://api.soundcloud.com/tracks/${trackId}/stream`)
   }
 
   render () {
@@ -37,8 +36,8 @@ class Header extends React.Component {
             </div>
             <div className='player'>
               <ul>
-                <img src='/images/play-arrow.png' className='pinkB' id='playTrack' onClick={this.playTrack.bind(this, this.state.trackId)}/>
-                <img src='/images/pause-button.png' className='pinkB' id='pauseTrack' onClick={this.pauseTrack.bind(this)}/>
+                <img src='/images/play-arrow.png' className='pinkB' id='playTrack' onClick={this.playTrack.bind(this, this.state.trackId)} />
+                <img src='/images/pause-button.png' className='pinkB' id='pauseTrack' onClick={this.pauseTrack.bind(this)} />
               </ul>
             </div>
           </div>
