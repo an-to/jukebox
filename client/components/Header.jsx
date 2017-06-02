@@ -26,7 +26,6 @@ class Header extends React.Component {
     this.setState({trackId: 126777857})
   }
   componentWillReceiveProps(props) {
-
      this.playTrack(props)
   }
 
@@ -39,7 +38,7 @@ class Header extends React.Component {
           </div>
           <div className='seven columns'>
             <div className='trackPlayingName'>
-              {this.props.currentTrack.result ? this.props.currentTrack.result.title : 'No track loaded'}
+              {this.props.currentTrack.result.title ?  this.props.currentTrack.result.title : this.props.currentTrack.result.name }
             </div>
             <div className='player'>
               <ul>
