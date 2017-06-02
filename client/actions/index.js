@@ -55,7 +55,6 @@ function fetchPlaylistTracks (id) {
           if (err) {
             console.log(err.message)
           } else {
-            console.log(res.body)
             dispatch(receivePlaylistTracks(res.body))
           }
         })

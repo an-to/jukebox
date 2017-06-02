@@ -11675,14 +11675,14 @@ var App = function App() {
   return _react2.default.createElement(
     'div',
     { className: 'app' },
-    _react2.default.createElement(_Header2.default, null),
-    _react2.default.createElement(_SearchContainer2.default, null),
     _react2.default.createElement(
       _reactRouterDom.HashRouter,
       null,
       _react2.default.createElement(
         'span',
         null,
+        _react2.default.createElement(_Header2.default, null),
+        _react2.default.createElement(_SearchContainer2.default, null),
         _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _ListPlaylists2.default }),
         _react2.default.createElement(_reactRouterDom.Route, { path: '/playlist/:id', component: _ShowPlaylist2.default })
       )
@@ -11825,7 +11825,6 @@ function fetchPlaylistTracks(id) {
       if (err) {
         console.log(err.message);
       } else {
-        console.log(res.body);
         dispatch(receivePlaylistTracks(res.body));
       }
     });
@@ -11852,6 +11851,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.getPlaylists = getPlaylists;
 exports.addPlaylist = addPlaylist;
+exports.addSong = addSong;
 
 var _superagent = __webpack_require__(94);
 
@@ -11868,6 +11868,12 @@ function getPlaylists(callback) {
 function addPlaylist(newPlaylistName, callback) {
   _superagent2.default.post('/api/v1/playlists/add').send({ playlistName: newPlaylistName }).end(function (err, res) {
     callback();
+  });
+}
+
+function addSong(song, playlistId, callback) {
+  _superagent2.default.post('/api/v1/playlist/' + playlistId + '/add').send({ song: song }).end(function (err, res) {
+    callback(res);
   });
 }
 
@@ -12214,8 +12220,10 @@ exports.default = SearchBar;
 
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__(13);
 
@@ -12225,49 +12233,91 @@ var _reactRedux = __webpack_require__(26);
 
 var _actions = __webpack_require__(100);
 
+var _api = __webpack_require__(101);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var SearchResults = function SearchResults(props) {
-    var classes = 'searchResults';
-    if (props.displaySongs === '') {
-        classes = 'searchResults hidden';
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var SearchResults = function (_React$Component) {
+  _inherits(SearchResults, _React$Component);
+
+  function SearchResults(props) {
+    _classCallCheck(this, SearchResults);
+
+    return _possibleConstructorReturn(this, (SearchResults.__proto__ || Object.getPrototypeOf(SearchResults)).call(this, props));
+  }
+
+  _createClass(SearchResults, [{
+    key: 'addSong',
+    value: function addSong(result) {
+      var playlistId = location.hash.split('/').pop();
+      (0, _api.addSong)(result, playlistId, console.log);
     }
-    return _react2.default.createElement(
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
+
+      var classes = 'searchResults';
+      var classesAdd = 'addSong hidden';
+      if (this.props.displaySongs === '') {
+        classes = 'searchResults hidden';
+      }
+
+      if (location.hash !== '#/') {
+        classesAdd = 'addSong';
+      }
+
+      return _react2.default.createElement(
         'div',
         { className: classes },
-        props.searchResults.map(function (result) {
-            return _react2.default.createElement(
-                'div',
-                { className: 'track row', key: result.id },
+        this.props.searchResults.map(function (result) {
+          return _react2.default.createElement(
+            'div',
+            { className: 'track row', key: result.id },
+            _react2.default.createElement(
+              'div',
+              { className: 'trackDescription ten columns' },
+              _react2.default.createElement(
+                'a',
+                { href: result.permalink_url },
                 _react2.default.createElement(
-                    'div',
-                    { className: 'trackDescription ten columns' },
-                    _react2.default.createElement(
-                        'a',
-                        { href: result.permalink_url },
-                        _react2.default.createElement(
-                            'span',
-                            null,
-                            result.title
-                        )
-                    )
-                ),
-                _react2.default.createElement(
-                    'div',
-                    { className: 'trackAction two columns' },
-                    _react2.default.createElement('img', { onClick: function onClick() {
-                            return props.dispatch((0, _actions.setCurrentTrack)(result.id));
-                        }, src: '/images/play-arrow.png', className: 'addSong' })
+                  'span',
+                  null,
+                  result.title
                 )
-            );
+              )
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'trackAction two columns' },
+              _react2.default.createElement('img', { onClick: function onClick() {
+                  return _this2.props.dispatch((0, _actions.setCurrentTrack)(result.id));
+                }, src: '/images/play-arrow.png', className: 'addSong' }),
+              _react2.default.createElement(
+                'button',
+                { className: classesAdd, onClick: _this2.addSong.bind(_this2, result) },
+                'ADD'
+              )
+            )
+          );
         })
-    );
-};
+      );
+    }
+  }]);
+
+  return SearchResults;
+}(_react2.default.Component);
 
 var mapState2Props = function mapState2Props(state) {
-    return {
-        searchResults: state.searchResults
-    };
+  return {
+    searchResults: state.searchResults
+  };
 };
 
 SearchResults = (0, _reactRedux.connect)(mapState2Props)(SearchResults);
@@ -12362,7 +12412,6 @@ function searchResults() {
 
   switch (action.type) {
     case 'RECEIVE_TRACKS':
-      console.log(action);
       return [].concat(_toConsumableArray(action.searchResults));
 
     default:
@@ -29827,7 +29876,6 @@ function currentTrack() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
   var action = arguments[1];
 
-  console.log(action);
   switch (action.type) {
     case 'SET_CURRENT_TRACK':
       return action.currentTrack;
@@ -29930,7 +29978,6 @@ var ShowPlaylist = function (_React$Component) {
 }(_react2.default.Component);
 
 var mapState2Props = function mapState2Props(state) {
-  console.log(state);
   return {
     playlistTracks: state.showPlaylist
   };

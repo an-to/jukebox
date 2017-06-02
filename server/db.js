@@ -6,7 +6,8 @@ module.exports = {
   addTrack,
   getPlaylistTracks,
   addPlaylist,
-  getPlaylists
+  getPlaylists,
+  addToPlaylist
 }
 
 // Tracks
@@ -33,7 +34,25 @@ function deleteTrack (id, connection) {
 
 function addTrack (trackObj, connection) {
   return connection('tracks')
-    .insert(trackObj)
+    .insert({
+      name: trackObj.title,
+      user_id: trackObj.user_id,
+      user_name: trackObj.user.username,
+      soundcloud_id: trackObj.id,
+      permalink_url: trackObj.permalink_url,
+      artwork_url: trackObj.artwork_url,
+      genre: trackObj.genre,
+      stream_url: trackObj.stream_url,
+      streamable: trackObj.streamable
+    })
+}
+
+function addToPlaylist (trackId, playlistId, connection) {
+  return connection('track_playlist')
+    .insert({
+      track_id: trackId[0],
+      playlist_id: playlistId
+    })
 }
 
 
