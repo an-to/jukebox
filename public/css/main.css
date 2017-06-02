@@ -13,6 +13,16 @@ input[type="text"].searchInput {
   border-bottom-right-radius: 0;
   border-top-right-radius: 0;
   transition: all 0.1s ease-in;
+  margin-bottom: 0;
+}
+
+.hidden {
+  display: none;
+}
+
+button.addSong {
+  background-color: none;
+  border: none;
 }
 
 input[type="text"].searchInput:focus {
@@ -22,6 +32,21 @@ input[type="text"].searchInput:focus {
 
 input[type="text"].searchInput:focus + .searchSubmit {
   border-color: deeppink;
+}
+
+.searchResults {
+  background-color: blue;
+  position: absolute;
+  z-index: 999;
+  width: 100%;
+  background-color: pink;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  border: 1px #FFA7B6 solid;
+}
+
+.track {
+  margin: 5px;
 }
 
 .headerWrapper {
@@ -79,4 +104,13 @@ body {
   display: flex;
   align-items: center;
   border-bottom: 1px solid pink;
+}
+
+.track {
+    display: flex;
+}
+
+.trackAction {
+    justify-content: flex-end;
+
 }
