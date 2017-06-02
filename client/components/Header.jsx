@@ -1,18 +1,36 @@
 import React from 'react'
-
-const apiKey = 'MHsPaGAB9flti3yZ6a7bMdgq1GM9n7EL'
-
-
-SC.initialize({
-  client_id: apiKey
-});
-
-// player function
-// On clicks for play and pause
-// on clicks for change vol
-// Needs to pass through the track id
+import SoundCloudAudio from 'soundcloud-audio'
 
 class Header extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      trackId: null,
+      error: null
+    }
+    this.scPlayer = new SoundCloudAudio('MHsPaGAB9flti3yZ6a7bMdgq1GM9n7EL')
+  }
+
+  getTrack(id) {
+    this.scPlayer.preload({streamUrl: `https://api.soundcloud.com/tracks/${id}/stream`})
+  }
+
+  pauseTrack(id) {
+    this.scPlayer.pause()
+  }
+
+  playTrack(id) {
+    this.scPlayer.play({streamUrl: `https://api.soundcloud.com/tracks/${id}/stream`})
+  }
+
+  componentDidMount() {
+    this.getTrack(126777857)
+  }
+
+
+
+
+
   render () {
     return (
       <div className='container-fluid headerWrapper'>
@@ -23,6 +41,14 @@ class Header extends React.Component {
           <div className='seven columns'>
             <div className='trackPlayingName'>
               i'm the title of a song wee wee wee
+            </div>
+            <div className='player'>
+              <ul>
+                <li onClick={this.playTrack(126777857)}>play</li>
+                <li onClick={this.pauseTrack()}>pause</li>
+                <li>vol +</li>
+                <li>vol -</li>
+              </ul>
             </div>
           </div>
         </div>
