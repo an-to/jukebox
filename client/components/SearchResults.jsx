@@ -15,7 +15,7 @@ let SearchResults = (props) => {
                <a href={result.permalink_url}><span>{result.title}</span></a>
            </div>
            <div className="trackAction two columns">
-               <a href='#'>Add</a>
+               <button className="addSong">Play</button>
            </div>
        </div>
         )}

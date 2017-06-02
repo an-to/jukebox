@@ -20,6 +20,11 @@ input[type="text"].searchInput {
   display: none;
 }
 
+button.addSong {
+  background-color: none;
+  border: none;
+}
+
 input[type="text"].searchInput:focus {
   border-color: deeppink;
   border-right: none;
