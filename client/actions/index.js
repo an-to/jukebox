@@ -32,6 +32,27 @@ function fetchTracks (query) {
   }
 }
 
+receivePlaylistTracks(songs){
+  return {
+    type: 'RECEIVE_PLAYLIST_TRACKS',
+    songs: songs
+  }
+}
+
+function fetchPlaylistTracks (id) {
+  return (dispatch) => {
+    request
+        .get(`/playlist/${id}`)
+        .end((err, res) => {
+          if (err) {
+            console.log(err.message)
+          } else {
+            dispatch(receivePlaylistTracks(res.body))
+          }
+        })
+  }
+}
+
 module.exports = {
   receiveTracks,
   searchError,

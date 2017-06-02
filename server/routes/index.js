@@ -23,6 +23,16 @@ router.get('/tracks/:id', (req, res) => {
     })
 })
 
+router.get('/playlist/:id', (req, res) => {
+  db.getPlaylistTracks(req.params.id, req.app.get('connection'))
+    .then((tracks) => {
+      res.json(tracks)
+    })
+    .catch((err) => {
+      res.status(500).send('DATABASE ERROR: ' + err.message)
+    })
+})
+
 router.post('/playlists/add', (req, res) => {
   db.addPlaylist(req.body.playlistName, req.app.get('connection'))
     .then(() => {

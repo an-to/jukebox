@@ -4,6 +4,7 @@ module.exports = {
   updateTrack,
   deleteTrack,
   addTrack,
+  getPlaylistTracks,
   addPlaylist
 }
 
@@ -30,6 +31,12 @@ function deleteTrack (id, connection) {
 function addTrack (trackObj, connection) {
   return connection('tracks')
     .insert(trackObj)
+}
+
+function getPlaylistTracks (id, connection) {
+  return connection('playlists')
+    .where('playlists.id', id)
+    .join('track_playlist', 'playlist_id', '=', 'playlists.id')
 }
 
 function addPlaylist (playlistName, connection) {

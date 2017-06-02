@@ -12,8 +12,10 @@ const App = () => (
     <Header />
     <SearchContainer />
     <Router>
-      <Route path='/' component={Content} />
-      <Route path='/playlist/:id' component={ShowPlaylist} />
+      <span>
+        <Route path='/' component={Content} />
+        <Route path='/playlist/:id' component={ShowPlaylist} />
+      </span>
     </Router>
   </div>
 )
