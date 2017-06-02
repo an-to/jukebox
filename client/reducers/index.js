@@ -1,8 +1,11 @@
 import {combineReducers} from 'redux'
 
-import subreddits from './subreddits'
+import searchResults from './searchResults'
+import currentTrack from './currentTrack'
+import showPlaylist from './showPlaylist'
 
 export default combineReducers({
-  subreddits
+  searchResults,
+  showPlaylist,
+  currentTrack
 })
-

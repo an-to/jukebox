@@ -4,8 +4,16 @@
   "description": "React Redux with simple async action",
   "main": "server/index",
   "scripts": {
-    "start": "nodemon --watch server server/index & webpack --watch",
-    "eslint": "eslint src"
+    "knex": "knex",
+    "test": "standard | snazzy & ava  -v 'test/**/*.test.js'",
+    "clientapitest": "ava -v test/client/actions.test.js",
+    "start": "node server server/index",
+    "eslint": "eslint src",
+    "dev": "nodemon --watch server server/index & webpack --watch"
+  },
+  "ava": {
+    "require": "babel-register",
+    "babel": "inherit"
   },
   "keywords": [
     "react",
@@ -14,22 +22,29 @@
   "author": "EDA",
   "license": "ISC",
   "devDependencies": {
+    "ava": "^0.19.1",
+    "babel": "^6.23.0",
     "babel-core": "^6.13.2",
     "babel-loader": "^6.2.4",
-    "babel-preset-es2015": "^6.13.2",
+    "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.11.1",
     "babel-preset-stage-0": "^6.24.1",
-    "eslint": "^3.3.1",
-    "eslint-config-standard": "^5.3.5",
-    "eslint-plugin-promise": "^2.0.1",
-    "eslint-plugin-react": "^6.1.2",
-    "eslint-plugin-standard": "^2.0.0",
+    "enzyme": "^2.8.2",
+    "jsdom": "^11.0.0",
+    "nock": "^9.0.13",
     "nodemon": "^1.11.0",
     "react": "^15.3.0",
+    "react-addons-test-utils": "^15.5.1",
     "react-dom": "^15.3.0",
     "react-redux": "^4.4.5",
+    "react-router-dom": "^4.1.1",
     "redux": "^3.5.2",
     "redux-thunk": "^2.1.0",
+    "sinon": "^2.3.2",
+    "snazzy": "^7.0.0",
+    "standard": "^10.0.2",
+    "superagent": "^2.3.0",
+    "supertest": "^3.0.0",
     "webpack": "^2.6.1",
     "webpack-dev-server": "^2.4.5"
   },
@@ -44,6 +59,8 @@
     "body-parser": "^1.17.2",
     "express": "^4.15.3",
     "knex": "^0.13.0",
+    "soundcloud-audio": "^1.1.0",
+    "sqlite3": "^3.1.8",
     "superagent": "^2.2.0"
   }
 }
