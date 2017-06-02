@@ -3,8 +3,8 @@ import React from 'react'
 import {HashRouter as Router, Route} from 'react-router-dom'
 
 import Header from './Header'
+import ListPlaylists from './ListPlaylists'
 import SearchContainer from '../containers/SearchContainer'
-import Content from './Content'
 import ShowPlaylist from './ShowPlaylist'
 
 const App = () => (
@@ -13,7 +13,7 @@ const App = () => (
     <SearchContainer />
     <Router>
       <span>
-        <Route exact path='/' component={Content} />
+        <Route exact path='/' component={ListPlaylists} />
         <Route path='/playlist/:id' component={ShowPlaylist} />
       </span>
     </Router>

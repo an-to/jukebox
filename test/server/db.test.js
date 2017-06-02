@@ -89,6 +89,8 @@ test('addTrack adds a track', t => {
     })
 })
 
+// Playlists
+
 test('addPlaylist adds a playlist', t => {
   const playlistName = {
     name: 'test playlist'
@@ -96,5 +98,13 @@ test('addPlaylist adds a playlist', t => {
   return db.addPlaylist(playlistName, t.context.db)
     .then((res) => {
       t.is(res[0], 2)
+    })
+})
+
+test('getPlaylists gets all playlists', t => {
+  return db.getPlaylists(t.context.db)
+    .then(function (result) {
+      var actual = result.length
+      t.is(actual, 1)
     })
 })
