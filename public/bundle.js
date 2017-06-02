@@ -11982,7 +11982,7 @@ var ShowPlaylist = function (_React$Component) {
   }, {
     key: 'renderSongs',
     value: function renderSongs() {
-      console.log(this.state.playlistTracks);
+      console.log(this.props.playlistTracks);
     }
   }, {
     key: 'render',
@@ -11990,8 +11990,7 @@ var ShowPlaylist = function (_React$Component) {
       return _react2.default.createElement(
         'div',
         null,
-        console.log(this.state.playlistTracks),
-        this.state.playlistTracks.length > 0 ? this.renderSongs() : console.log('error')
+        this.renderSongs()
       );
     }
   }]);
@@ -12000,8 +11999,9 @@ var ShowPlaylist = function (_React$Component) {
 }(_react2.default.Component);
 
 var mapState2Props = function mapState2Props(state) {
+  console.log(state);
   return {
-    playlistTracks: state.playlistTracks
+    playlistTracks: state.showPlaylist
   };
 };
 

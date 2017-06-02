@@ -18,22 +18,22 @@ class ShowPlaylist extends React.Component {
   }
 
   renderSongs() {
-    console.log(this.state.playlistTracks);
+    console.log(this.props.playlistTracks);
   }
 
   render () {
     return (
       <div>
-        {console.log(this.state.playlistTracks)}
-        {(this.state.playlistTracks.length > 0) ? this.renderSongs() : console.log('error')}
+        {this.renderSongs()}
       </div>
     )
   }
 }
 
 const mapState2Props = (state) => {
+  console.log(state)
   return {
-    playlistTracks: state.playlistTracks
+    playlistTracks: state.showPlaylist
   }
 }
 
