@@ -16,3 +16,12 @@ export function addPlaylist (newPlaylistName, callback) {
       callback()
     })
 }
+
+export function addSong (song, playlistId, callback) {
+  request
+    .post(`/api/v1/playlist/${playlistId}/add`)
+    .send({ song })
+    .end((err, res) => {
+      callback(res)
+    })
+}

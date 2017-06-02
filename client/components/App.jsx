@@ -9,10 +9,10 @@ import ShowPlaylist from './ShowPlaylist'
 
 const App = () => (
   <div className='app'>
-    <Header />
-    <SearchContainer />
     <Router>
       <span>
+        <Header />
+        <SearchContainer />
         <Route exact path='/' component={ListPlaylists} />
         <Route path='/playlist/:id' component={ShowPlaylist} />
       </span>

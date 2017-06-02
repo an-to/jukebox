@@ -43,7 +43,6 @@ class ShowPlaylist extends React.Component {
 }
 
 const mapState2Props = (state) => {
-  console.log(state)
   return {
     playlistTracks: state.showPlaylist
   }
